@@ -1,12 +1,35 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useEffect } from 'react';
+import NavBar from '@/components/NavBar';
+import HeroSection from '@/components/HeroSection';
+import Footer from '@/components/Footer';
 
 const Index = () => {
+  useEffect(() => {
+    document.title = "NexOva | Creative Web Solutions";
+    
+    // Simple animation sequence for initial load
+    const body = document.body;
+    body.style.opacity = '0';
+    
+    setTimeout(() => {
+      body.style.transition = 'opacity 0.8s ease-out';
+      body.style.opacity = '1';
+    }, 100);
+    
+    return () => {
+      body.style.opacity = '';
+      body.style.transition = '';
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen">
+      <NavBar />
+      <main>
+        <HeroSection />
+      </main>
+      <Footer />
     </div>
   );
 };
