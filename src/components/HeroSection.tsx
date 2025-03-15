@@ -1,10 +1,24 @@
-
 import { ArrowDown } from 'lucide-react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const HeroSection = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const waveContainerRef = useRef<HTMLDivElement>(null);
+  const [scrolled, setScrolled] = useState(false);
+  
+  useEffect(() => {
+    const handleScrollEffect = () => {
+      const scrollPosition = window.scrollY;
+      if (scrollPosition > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    
+    window.addEventListener('scroll', handleScrollEffect);
+    return () => window.removeEventListener('scroll', handleScrollEffect);
+  }, []);
   
   useEffect(() => {
     if (!canvasRef.current || !waveContainerRef.current) return;
@@ -60,18 +74,15 @@ const HeroSection = () => {
       }
       
       update() {
-        // Move wave points based on cursor position
         const dx = mouseX - this.originalX;
         const dy = mouseY - this.originalY;
         const distance = Math.sqrt(dx * dx + dy * dy);
         const maxDistance = 200;
         
-        // Create wavey effect
         this.angle += 0.02;
         this.x = this.originalX + Math.sin(this.angle) * 20;
         this.y = this.originalY + Math.cos(this.angle) * 20;
         
-        // Add mouse interaction
         if (distance < maxDistance) {
           const force = (maxDistance - distance) / maxDistance;
           this.x -= dx * force * 0.05;
@@ -85,7 +96,6 @@ const HeroSection = () => {
       }
     }
     
-    // Create wave points
     const waves: Wave[] = [];
     const colors = ['rgba(155, 135, 245, 0.2)', 'rgba(126, 105, 171, 0.15)', 'rgba(214, 188, 250, 0.1)'];
     
@@ -105,7 +115,6 @@ const HeroSection = () => {
     createWaves();
     window.addEventListener('resize', createWaves);
     
-    // Track mouse position
     const trackMouse = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
       mouseX = e.clientX - rect.left;
@@ -114,7 +123,6 @@ const HeroSection = () => {
     
     document.addEventListener('mousemove', trackMouse);
     
-    // Animation loop
     const animate = () => {
       requestAnimationFrame(animate);
       ctx.clearRect(0, 0, width, height);
@@ -132,9 +140,9 @@ const HeroSection = () => {
   }, []);
   
   const scrollToExplore = () => {
-    const exploreSection = document.getElementById('explore');
-    if (exploreSection) {
-      exploreSection.scrollIntoView({
+    const servicesSection = document.getElementById('services-section');
+    if (servicesSection) {
+      servicesSection.scrollIntoView({
         behavior: 'smooth'
       });
     }
@@ -146,20 +154,20 @@ const HeroSection = () => {
         <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
       </div>
       
-      <div className="flex w-full max-w-7xl mx-auto justify-between items-start">
+      <div className={`flex w-full max-w-7xl mx-auto justify-between items-start transition-opacity duration-500 ${scrolled ? 'opacity-0' : 'opacity-100'}`}>
         <span className="text-sm text-muted-foreground animate-fade-in">Welcome</span>
         <span className="text-sm text-muted-foreground animate-fade-in">Est. 2025</span>
       </div>
       
-      <div className="w-full max-w-7xl mx-auto my-8 flex flex-col justify-center">
-        <h1 className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-display font-bold text-center leading-none tracking-tighter animate-fade-up" style={{
+      <div id="brand-title" className={`w-full max-w-7xl mx-auto my-8 flex flex-col justify-center transition-all duration-700 ease-out ${scrolled ? 'transform translate-x-[-30%] scale-75' : ''}`}>
+        <h1 className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-display font-bold text-center md:text-left leading-none tracking-tighter animate-fade-up" style={{
           animationDelay: '0.3s'
         }}>
           NexOva
         </h1>
       </div>
 
-      <div className="absolute bottom-20 left-0 right-0">
+      <div className={`absolute bottom-20 left-0 right-0 transition-opacity duration-500 ${scrolled ? 'opacity-0' : 'opacity-100'}`}>
         <div className="max-w-3xl mx-auto text-center animate-fade-up" style={{
           animationDelay: '0.6s'
         }}>
@@ -172,7 +180,7 @@ const HeroSection = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-10 left-10 flex items-center space-x-2 animate-fade-in" style={{
+      <div className={`absolute bottom-10 left-10 flex items-center space-x-2 animate-fade-in transition-opacity duration-500 ${scrolled ? 'opacity-0' : 'opacity-100'}`} style={{
         animationDelay: '0.9s'
       }}>
         <button onClick={scrollToExplore} className="flex items-center space-x-2 group">
@@ -181,7 +189,7 @@ const HeroSection = () => {
         </button>
       </div>
 
-      <div className="absolute bottom-10 right-10 animate-fade-in" style={{
+      <div className={`absolute bottom-10 right-10 animate-fade-in transition-opacity duration-500 ${scrolled ? 'opacity-0' : 'opacity-100'}`} style={{
         animationDelay: '0.9s'
       }}>
         <div className="flex items-center space-x-6">

@@ -1,10 +1,13 @@
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import NavBar from '@/components/NavBar';
 import HeroSection from '@/components/HeroSection';
+import ServicesSection from '@/components/ServicesSection';
 import Footer from '@/components/Footer';
 
 const Index = () => {
+  const [scrollY, setScrollY] = useState(0);
+  
   useEffect(() => {
     document.title = "NexOva | Creative Web Solutions";
     
@@ -17,17 +20,26 @@ const Index = () => {
       body.style.opacity = '1';
     }, 100);
     
+    // Handle scroll events
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    
     return () => {
       body.style.opacity = '';
       body.style.transition = '';
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-x-hidden">
       <NavBar />
       <main>
         <HeroSection />
+        <ServicesSection />
       </main>
       <Footer />
     </div>
