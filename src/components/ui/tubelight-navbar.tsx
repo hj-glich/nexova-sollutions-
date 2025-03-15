@@ -3,7 +3,7 @@
 
 import React, { useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import { LucideIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -19,8 +19,16 @@ interface NavBarProps {
 }
 
 export function TubelightNavBar({ items, className }: NavBarProps) {
-  const [activeTab, setActiveTab] = useState(items[0].name)
+  const location = useLocation()
+  const [activeTab, setActiveTab] = useState("")
   const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    // Set active tab based on current route
+    const currentPath = location.pathname
+    const currentItem = items.find(item => item.url === currentPath) || items[0]
+    setActiveTab(currentItem.name)
+  }, [location.pathname, items])
 
   useEffect(() => {
     const handleResize = () => {
