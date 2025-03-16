@@ -46,8 +46,8 @@
     --sidebar-border: 0 0% 91%;
     --sidebar-ring: 217 91% 60%;
 
-    /* Vintage text variables */
-    --vintage-text: 35 25% 25%;
+    /* Vintage text variables - updated to black */
+    --vintage-text: 0 0% 0%;
     --vintage-text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
   }
 
@@ -118,7 +118,7 @@
   }
 }
 
-/* Vintage text styles */
+/* Vintage text styles - updated to black */
 .vintage-text {
   color: hsl(var(--vintage-text));
   text-shadow: var(--vintage-text-shadow);
@@ -128,5 +128,5 @@
 }
 
 .fade-to-bg {
-  transition: color 0.5s ease, opacity 0.5s ease;
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
