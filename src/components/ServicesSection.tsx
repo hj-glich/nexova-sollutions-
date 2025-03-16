@@ -83,19 +83,6 @@ const ServicesSection = () => {
           </div>
         </div>
       </div>
-      
-      {/* Floating NexOva text that appears as you scroll into the section */}
-      <div 
-        className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none transition-opacity duration-500 z-10`}
-        style={{ 
-          opacity: Math.min(scrollProgress * 1.5, 1),
-          filter: `blur(${(1 - scrollProgress) * 5}px)`
-        }}
-      >
-        <h1 className="text-[20vw] font-display font-bold text-black/10">
-          NexOva
-        </h1>
-      </div>
     </section>
   );
 };
