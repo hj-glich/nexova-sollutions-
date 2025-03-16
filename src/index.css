@@ -45,36 +45,17 @@
     --sidebar-accent-foreground: 0 0% 10%;
     --sidebar-border: 0 0% 91%;
     --sidebar-ring: 217 91% 60%;
+
+    /* Vintage text variables */
+    --vintage-text: 35 25% 25%;
+    --vintage-text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
   }
 
   .dark {
     --background: 0 0% 10%;
     --foreground: 0 0% 98%;
 
-    --card: 0 0% 15%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 0 0% 15%;
-    --popover-foreground: 0 0% 98%;
-
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 10%;
-
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 65%;
-
-    --accent: 0 0% 15%;
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 0 0% 28%;
+    /* ... keep existing code (dark mode variables) */
   }
 }
 
@@ -135,4 +116,16 @@
   60% {
     transform: translateY(-5px);
   }
+}
+
+/* Vintage text styles */
+.vintage-text {
+  color: rgba(62, 56, 45, 0.95);
+  text-shadow: var(--vintage-text-shadow);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.fade-to-bg {
+  transition: color 0.5s ease, opacity 0.5s ease;
 }

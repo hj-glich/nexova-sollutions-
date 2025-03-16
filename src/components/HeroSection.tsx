@@ -149,6 +149,19 @@ const HeroSection = () => {
   const mainTextTransform = `translateY(${scrollY * 0.5}px)`;
   const nexovaTextScale = Math.max(0.5, 1 - scrollY / 800);
   
+  // Calculate text color fade effect - gradually fade to background color
+  const textColorOpacity = Math.max(0.2, 1 - scrollY / 400);
+  const oldTextStyle = {
+    color: `rgba(62, 56, 45, ${textColorOpacity})`,
+    textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
+    fontFamily: 'Space Grotesk, serif',
+    fontWeight: 400,
+    letterSpacing: '0.02em'
+  };
+  
+  // Style for the NexOva text that gradually fades to match background
+  const nexovaTextColor = `rgba(32, 32, 32, ${Math.min(1, 0.4 + scrollY / 1000)})`;
+  
   return (
     <section className="relative h-screen flex flex-col justify-center items-center px-6 overflow-hidden">
       <div ref={waveContainerRef} className="absolute inset-0 -z-10 bg-nexova-light">
@@ -156,17 +169,23 @@ const HeroSection = () => {
       </div>
       
       <div className={`flex w-full max-w-7xl mx-auto justify-between items-start transition-opacity duration-500`} 
-        style={{ opacity: mainTextOpacity, transform: mainTextTransform }}>
+        style={{ 
+          opacity: mainTextOpacity, 
+          transform: mainTextTransform,
+          ...oldTextStyle 
+        }}>
         <span className="text-sm text-muted-foreground animate-fade-in">Welcome</span>
         <span className="text-sm text-muted-foreground animate-fade-in">Est. 2025</span>
       </div>
       
       <div id="brand-title" className="w-full max-w-7xl mx-auto my-8 flex flex-col justify-center transition-all duration-700 ease-out fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10" style={{ 
         transform: `translate(-50%, -50%) scale(${nexovaTextScale})`,
-        opacity: Math.min(1, 0.2 + scrollY / 1000)
+        opacity: Math.min(1, 0.2 + scrollY / 1000),
+        color: nexovaTextColor
       }}>
         <h1 className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-display font-bold text-center leading-none tracking-tighter animate-fade-up" style={{
-          animationDelay: '0.3s'
+          animationDelay: '0.3s',
+          letterSpacing: '-0.03em'
         }}>
           NexOva
         </h1>
@@ -174,12 +193,13 @@ const HeroSection = () => {
 
       <div className={`absolute bottom-20 left-0 right-0 transition-all duration-500`} style={{ 
         opacity: mainTextOpacity, 
-        transform: mainTextTransform 
+        transform: mainTextTransform,
+        ...oldTextStyle
       }}>
         <div className="max-w-3xl mx-auto text-center animate-fade-up" style={{
           animationDelay: '0.6s'
         }}>
-          <h2 className="text-xl md:text-2xl font-medium mb-2">
+          <h2 className="text-xl md:text-2xl font-medium mb-2 vintage-text">
             Bringing brands to life through
           </h2>
           <p className="text-xl md:text-2xl font-display italic">
@@ -191,7 +211,8 @@ const HeroSection = () => {
       <div className={`absolute bottom-10 left-10 flex items-center space-x-2 animate-fade-in transition-all duration-500`} style={{ 
         opacity: mainTextOpacity,
         transform: mainTextTransform,
-        animationDelay: '0.9s'
+        animationDelay: '0.9s',
+        ...oldTextStyle
       }}>
         <button onClick={scrollToExplore} className="flex items-center space-x-2 group">
           <ArrowDown size={20} className="group-hover:translate-y-1 transition-transform scroll-indicator" />
@@ -202,7 +223,8 @@ const HeroSection = () => {
       <div className={`absolute bottom-10 right-10 animate-fade-in transition-all duration-500`} style={{ 
         opacity: mainTextOpacity,
         transform: mainTextTransform,
-        animationDelay: '0.9s'
+        animationDelay: '0.9s',
+        ...oldTextStyle
       }}>
         <div className="flex items-center space-x-6">
           <div>
