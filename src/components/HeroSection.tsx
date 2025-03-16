@@ -1,19 +1,15 @@
+
 import { ArrowDown } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 const HeroSection = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const waveContainerRef = useRef<HTMLDivElement>(null);
-  const [scrolled, setScrolled] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
   
   useEffect(() => {
     const handleScrollEffect = () => {
-      const scrollPosition = window.scrollY;
-      if (scrollPosition > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrollY(window.scrollY);
     };
     
     window.addEventListener('scroll', handleScrollEffect);
@@ -148,26 +144,32 @@ const HeroSection = () => {
     }
   };
   
+  // Calculate opacity and transforms based on scroll position
+  const initialOpacity = scrollY < 100 ? 1 : 0;
+  const logoTransform = scrollY > 100 
+    ? `translate(${Math.min(scrollY / 10, 20)}%, 0) scale(${Math.max(1 - scrollY / 500, 0.7)})`
+    : '';
+  
   return (
     <section className="relative h-screen flex flex-col justify-center items-center px-6 overflow-hidden">
       <div ref={waveContainerRef} className="absolute inset-0 -z-10 bg-nexova-light">
         <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
       </div>
       
-      <div className={`flex w-full max-w-7xl mx-auto justify-between items-start transition-opacity duration-500 ${scrolled ? 'opacity-0' : 'opacity-100'}`}>
+      <div className={`flex w-full max-w-7xl mx-auto justify-between items-start transition-opacity duration-500 opacity-${initialOpacity}`}>
         <span className="text-sm text-muted-foreground animate-fade-in">Welcome</span>
         <span className="text-sm text-muted-foreground animate-fade-in">Est. 2025</span>
       </div>
       
-      <div id="brand-title" className={`w-full max-w-7xl mx-auto my-8 flex flex-col justify-center transition-all duration-700 ease-out ${scrolled ? 'transform translate-x-[-30%] scale-75' : ''}`}>
-        <h1 className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-display font-bold text-center md:text-left leading-none tracking-tighter animate-fade-up" style={{
+      <div id="brand-title" className="w-full max-w-7xl mx-auto my-8 flex flex-col justify-center transition-all duration-700 ease-out" style={{ transform: logoTransform }}>
+        <h1 className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-display font-bold text-center leading-none tracking-tighter animate-fade-up" style={{
           animationDelay: '0.3s'
         }}>
           NexOva
         </h1>
       </div>
 
-      <div className={`absolute bottom-20 left-0 right-0 transition-opacity duration-500 ${scrolled ? 'opacity-0' : 'opacity-100'}`}>
+      <div className={`absolute bottom-20 left-0 right-0 transition-opacity duration-500 opacity-${initialOpacity}`}>
         <div className="max-w-3xl mx-auto text-center animate-fade-up" style={{
           animationDelay: '0.6s'
         }}>
@@ -180,7 +182,7 @@ const HeroSection = () => {
         </div>
       </div>
 
-      <div className={`absolute bottom-10 left-10 flex items-center space-x-2 animate-fade-in transition-opacity duration-500 ${scrolled ? 'opacity-0' : 'opacity-100'}`} style={{
+      <div className={`absolute bottom-10 left-10 flex items-center space-x-2 animate-fade-in transition-opacity duration-500 opacity-${initialOpacity}`} style={{
         animationDelay: '0.9s'
       }}>
         <button onClick={scrollToExplore} className="flex items-center space-x-2 group">
@@ -189,7 +191,7 @@ const HeroSection = () => {
         </button>
       </div>
 
-      <div className={`absolute bottom-10 right-10 animate-fade-in transition-opacity duration-500 ${scrolled ? 'opacity-0' : 'opacity-100'}`} style={{
+      <div className={`absolute bottom-10 right-10 animate-fade-in transition-opacity duration-500 opacity-${initialOpacity}`} style={{
         animationDelay: '0.9s'
       }}>
         <div className="flex items-center space-x-6">

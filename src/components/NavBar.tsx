@@ -39,17 +39,9 @@ const NavBar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
-  return <>
-      <TubelightNavBar items={navItems} className={`sm:top-6 transition-all duration-500 ${scrolled ? 'sm:-translate-y-2' : ''}`} />
-      <div className={`fixed top-8 right-8 z-50 transition-all duration-500 ${scrolled ? '-translate-y-2' : ''}`}>
-        <Link 
-          to="/contact" 
-          className="rounded-full border border-black px-6 py-2 text-sm font-medium transition-all hover:bg-black hover:text-white backdrop-blur-md bg-background/5"
-        >
-          Let's Talk
-        </Link>
-      </div>
-    </>;
+  return (
+    <TubelightNavBar items={navItems} className={`sm:top-6 transition-all duration-500 ${scrolled ? 'sm:-translate-y-2' : ''}`} />
+  );
 };
 
 export default NavBar;

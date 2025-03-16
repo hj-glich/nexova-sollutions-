@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 const ServicesSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -19,10 +20,24 @@ const ServicesSection = () => {
       observer.observe(sectionRef.current);
     }
     
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+      
+      const rect = sectionRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      // Calculate how far we've scrolled into the section (0 to 1)
+      const progress = Math.max(0, Math.min(1, 1 - (rect.top / windowHeight)));
+      setScrollProgress(progress);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    
     return () => {
       if (sectionRef.current) {
         observer.unobserve(sectionRef.current);
       }
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
   
@@ -67,6 +82,19 @@ const ServicesSection = () => {
             </div>
           </div>
         </div>
+      </div>
+      
+      {/* Floating NexOva text that appears as you scroll into the section */}
+      <div 
+        className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none transition-opacity duration-500 z-10`}
+        style={{ 
+          opacity: Math.min(scrollProgress * 1.5, 1),
+          filter: `blur(${(1 - scrollProgress) * 5}px)`
+        }}
+      >
+        <h1 className="text-[20vw] font-display font-bold text-black/10">
+          NexOva
+        </h1>
       </div>
     </section>
   );
