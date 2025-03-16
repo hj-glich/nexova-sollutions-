@@ -120,8 +120,9 @@
 
 /* Vintage text styles */
 .vintage-text {
-  color: rgba(62, 56, 45, 0.95);
+  color: hsl(var(--vintage-text));
   text-shadow: var(--vintage-text-shadow);
+  font-family: 'Space Grotesk', serif;
   font-weight: 400;
   letter-spacing: 0.02em;
 }
