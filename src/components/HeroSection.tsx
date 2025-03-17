@@ -145,13 +145,8 @@ const HeroSection = () => {
   
   const scrollPercentage = Math.min(1, scrollY / window.innerHeight);
   
-  const titleScale = Math.max(0.5, 1 - scrollPercentage * 0.5);
-  const titleY = scrollPercentage * -50;
   const titleOpacity = Math.max(0.3, 1 - scrollPercentage * 1.5);
-  
   const elementsOpacity = Math.max(0, 1 - scrollPercentage * 2.5);
-  
-  const taglineScale = Math.max(0.8, 1 - scrollPercentage * 0.3);
   const taglineOpacity = Math.max(0, 1 - scrollPercentage * 2);
   
   return (
@@ -171,11 +166,10 @@ const HeroSection = () => {
       </div>
       
       <div 
-        className="w-full max-w-7xl mx-auto my-8 flex flex-col justify-center transition-all duration-700 ease-out fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10" 
+        className="w-full max-w-7xl mx-auto my-8 flex flex-col justify-center transition-all duration-700 ease-out z-10" 
         style={{ 
-          transform: `translate(-50%, calc(-50% + ${titleY}px)) scale(${titleScale})`,
           opacity: titleOpacity,
-          transition: 'transform 0.5s ease, opacity 0.5s ease',
+          transition: 'opacity 0.5s ease',
         }}
       >
         <h1 
@@ -193,9 +187,8 @@ const HeroSection = () => {
       <div 
         className="absolute bottom-20 left-0 right-0 transition-all duration-500" 
         style={{ 
-          opacity: taglineOpacity, 
-          transform: `scale(${taglineScale})`,
-          transition: 'opacity 0.5s ease, transform 0.5s ease',
+          opacity: taglineOpacity,
+          transition: 'opacity 0.5s ease',
         }}
       >
         <div 
@@ -248,7 +241,6 @@ const HeroSection = () => {
         className="absolute bottom-24 right-24 w-6 h-6 rounded-full bg-black fade-to-bg"
         style={{
           opacity: elementsOpacity,
-          transform: `scale(${Math.max(0.5, 1 - scrollPercentage)})`,
         }}
       />
     </section>
