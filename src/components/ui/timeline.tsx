@@ -38,11 +38,11 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
       className="w-full bg-nexova-light dark:bg-nexova-dark font-sans md:px-10"
       ref={containerRef}
     >
-      <div className="max-w-7xl mx-auto py-20 px-4 md:px-8 lg:px-10">
-        <h2 className="text-lg md:text-4xl mb-4 text-black dark:text-white max-w-4xl font-display">
+      <div className="max-w-7xl mx-auto py-20 px-4 md:px-8 lg:px-10 text-center">
+        <h2 className="text-lg md:text-4xl mb-4 text-black dark:text-white max-w-4xl mx-auto font-display font-bold">
           Our Process
         </h2>
-        <p className="text-neutral-700 dark:text-neutral-300 text-sm md:text-base max-w-sm">
+        <p className="text-neutral-700 dark:text-neutral-300 text-sm md:text-base max-w-sm mx-auto">
           We follow a proven method to deliver exceptional results for every project.
         </p>
       </div>
