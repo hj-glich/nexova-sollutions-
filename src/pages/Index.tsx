@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import NavBar from '@/components/NavBar';
 import HeroSection from '@/components/HeroSection';
 import ServicesSection from '@/components/ServicesSection';
+import ProcessSection from '@/components/ProcessSection';
 import Footer from '@/components/Footer';
 
 const Index = () => {
@@ -42,6 +43,7 @@ const Index = () => {
       <main className="relative">
         <HeroSection />
         <ServicesSection />
+        <ProcessSection />
       </main>
       <Footer />
     </div>
