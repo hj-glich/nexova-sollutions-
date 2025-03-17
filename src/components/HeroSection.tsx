@@ -150,7 +150,6 @@ const HeroSection = () => {
   const titleOpacity = Math.max(0.3, 1 - scrollPercentage * 1.5);
   
   const elementsOpacity = Math.max(0, 1 - scrollPercentage * 2.5);
-  const elementsY = scrollPercentage * 30;
   
   const taglineScale = Math.max(0.8, 1 - scrollPercentage * 0.3);
   const taglineOpacity = Math.max(0, 1 - scrollPercentage * 2);
@@ -164,9 +163,8 @@ const HeroSection = () => {
       <div 
         className="flex w-full max-w-7xl mx-auto justify-between items-start animate-fade-in" 
         style={{ 
-          opacity: elementsOpacity, 
-          transform: `translateY(${elementsY}px)`,
-          transition: 'opacity 0.5s ease, transform 0.5s ease',
+          opacity: elementsOpacity,
+          transition: 'opacity 0.5s ease',
         }}>
         <span className="text-sm">Welcome</span>
         <span className="text-sm">Est. 2025</span>
@@ -196,7 +194,7 @@ const HeroSection = () => {
         className="absolute bottom-20 left-0 right-0 transition-all duration-500" 
         style={{ 
           opacity: taglineOpacity, 
-          transform: `translateY(${elementsY}px) scale(${taglineScale})`,
+          transform: `scale(${taglineScale})`,
           transition: 'opacity 0.5s ease, transform 0.5s ease',
         }}
       >
@@ -219,8 +217,7 @@ const HeroSection = () => {
         className="absolute bottom-10 left-10 flex items-center space-x-2 animate-fade-in" 
         style={{ 
           opacity: elementsOpacity,
-          transform: `translateY(${elementsY}px)`,
-          transition: 'opacity 0.5s ease, transform 0.5s ease',
+          transition: 'opacity 0.5s ease',
           animationDelay: '0.9s',
         }}
       >
@@ -234,8 +231,7 @@ const HeroSection = () => {
         className="absolute bottom-10 right-10 animate-fade-in" 
         style={{ 
           opacity: elementsOpacity,
-          transform: `translateY(${elementsY}px)`,
-          transition: 'opacity 0.5s ease, transform 0.5s ease',
+          transition: 'opacity 0.5s ease',
           animationDelay: '0.9s',
         }}
       >
