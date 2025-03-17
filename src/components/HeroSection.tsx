@@ -143,10 +143,17 @@ const HeroSection = () => {
     }
   };
   
-  // Calculate opacity and transforms based on scroll position
-  const mainTextOpacity = Math.max(0, 1 - scrollY / 300);
-  const mainTextTransform = `translateY(${scrollY * 0.5}px)`;
-  const nexovaTextScale = Math.max(0.5, 1 - scrollY / 800);
+  const scrollPercentage = Math.min(1, scrollY / window.innerHeight);
+  
+  const titleScale = Math.max(0.5, 1 - scrollPercentage * 0.5);
+  const titleY = scrollPercentage * -50;
+  const titleOpacity = Math.max(0.3, 1 - scrollPercentage * 1.5);
+  
+  const elementsOpacity = Math.max(0, 1 - scrollPercentage * 2.5);
+  const elementsY = scrollPercentage * 30;
+  
+  const taglineScale = Math.max(0.8, 1 - scrollPercentage * 0.3);
+  const taglineOpacity = Math.max(0, 1 - scrollPercentage * 2);
   
   return (
     <section className="relative h-screen flex flex-col justify-center items-center px-6 overflow-hidden">
@@ -155,27 +162,30 @@ const HeroSection = () => {
       </div>
       
       <div 
-        className="flex w-full max-w-7xl mx-auto justify-between items-start transition-all duration-500" 
+        className="flex w-full max-w-7xl mx-auto justify-between items-start animate-fade-in" 
         style={{ 
-          opacity: mainTextOpacity, 
-          transform: mainTextTransform,
+          opacity: elementsOpacity, 
+          transform: `translateY(${elementsY}px)`,
+          transition: 'opacity 0.5s ease, transform 0.5s ease',
         }}>
-        <span className="text-sm vintage-text animate-fade-in">Welcome</span>
-        <span className="text-sm vintage-text animate-fade-in">Est. 2025</span>
+        <span className="text-sm">Welcome</span>
+        <span className="text-sm">Est. 2025</span>
       </div>
       
       <div 
-        id="brand-title" 
         className="w-full max-w-7xl mx-auto my-8 flex flex-col justify-center transition-all duration-700 ease-out fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10" 
         style={{ 
-          transform: `translate(-50%, -50%) scale(${nexovaTextScale})`
+          transform: `translate(-50%, calc(-50% + ${titleY}px)) scale(${titleScale})`,
+          opacity: titleOpacity,
+          transition: 'transform 0.5s ease, opacity 0.5s ease',
         }}
       >
         <h1 
-          className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-display font-bold text-center leading-none tracking-tighter animate-fade-up vintage-text" 
+          className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-display font-bold text-center leading-none tracking-tighter animate-fade-up"
           style={{
             animationDelay: '0.3s',
-            letterSpacing: '-0.03em'
+            letterSpacing: '-0.03em',
+            color: 'black',
           }}
         >
           NexOva
@@ -185,8 +195,9 @@ const HeroSection = () => {
       <div 
         className="absolute bottom-20 left-0 right-0 transition-all duration-500" 
         style={{ 
-          opacity: mainTextOpacity, 
-          transform: mainTextTransform,
+          opacity: taglineOpacity, 
+          transform: `translateY(${elementsY}px) scale(${taglineScale})`,
+          transition: 'opacity 0.5s ease, transform 0.5s ease',
         }}
       >
         <div 
@@ -195,34 +206,36 @@ const HeroSection = () => {
             animationDelay: '0.6s'
           }}
         >
-          <h2 className="text-xl md:text-2xl font-medium mb-2 vintage-text">
+          <h2 className="text-xl md:text-2xl font-medium mb-2">
             Bringing brands to life through
           </h2>
-          <p className="text-xl md:text-2xl font-display italic vintage-text">
+          <p className="text-xl md:text-2xl font-display italic">
             creative web solutions
           </p>
         </div>
       </div>
 
       <div 
-        className="absolute bottom-10 left-10 flex items-center space-x-2 animate-fade-in transition-all duration-500" 
+        className="absolute bottom-10 left-10 flex items-center space-x-2 animate-fade-in" 
         style={{ 
-          opacity: mainTextOpacity,
-          transform: mainTextTransform,
+          opacity: elementsOpacity,
+          transform: `translateY(${elementsY}px)`,
+          transition: 'opacity 0.5s ease, transform 0.5s ease',
           animationDelay: '0.9s',
         }}
       >
         <button onClick={scrollToExplore} className="flex items-center space-x-2 group">
           <ArrowDown size={20} className="group-hover:translate-y-1 transition-transform scroll-indicator" />
-          <span className="text-sm font-medium vintage-text">Scroll to Explore</span>
+          <span className="text-sm font-medium">Scroll to Explore</span>
         </button>
       </div>
 
       <div 
-        className="absolute bottom-10 right-10 animate-fade-in transition-all duration-500" 
+        className="absolute bottom-10 right-10 animate-fade-in" 
         style={{ 
-          opacity: mainTextOpacity,
-          transform: mainTextTransform,
+          opacity: elementsOpacity,
+          transform: `translateY(${elementsY}px)`,
+          transition: 'opacity 0.5s ease, transform 0.5s ease',
           animationDelay: '0.9s',
         }}
       >
@@ -231,9 +244,17 @@ const HeroSection = () => {
             <span className="text-sm font-medium"></span>
             <p className="text-xs text-muted-foreground"></p>
           </div>
-          <span className="text-sm font-medium vintage-text">Featured Projects</span>
+          <span className="text-sm font-medium">Featured Projects</span>
         </div>
       </div>
+
+      <div
+        className="absolute bottom-24 right-24 w-6 h-6 rounded-full bg-black fade-to-bg"
+        style={{
+          opacity: elementsOpacity,
+          transform: `scale(${Math.max(0.5, 1 - scrollPercentage)})`,
+        }}
+      />
     </section>
   );
 };

@@ -7,17 +7,19 @@ import Footer from '@/components/Footer';
 
 const Index = () => {
   const [scrollY, setScrollY] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
   
   useEffect(() => {
     document.title = "NexOva | Creative Web Solutions";
     
-    // Simple animation sequence for initial load
+    // Enhanced animation sequence for initial load
     const body = document.body;
     body.style.opacity = '0';
     
     setTimeout(() => {
-      body.style.transition = 'opacity 0.8s ease-out';
+      body.style.transition = 'opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1)';
       body.style.opacity = '1';
+      setIsLoaded(true);
     }, 100);
     
     // Handle scroll events

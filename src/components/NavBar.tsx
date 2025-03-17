@@ -28,6 +28,7 @@ const NavBar = () => {
   
   useEffect(() => {
     const handleScroll = () => {
+      // Make navbar smaller when scrolled down
       if (window.scrollY > 50) {
         setScrolled(true);
       } else {
@@ -40,7 +41,14 @@ const NavBar = () => {
   }, []);
   
   return (
-    <TubelightNavBar items={navItems} className={`sm:top-6 transition-all duration-500 ${scrolled ? 'sm:-translate-y-2' : ''}`} />
+    <TubelightNavBar 
+      items={navItems} 
+      className={`transition-all duration-500 ${
+        scrolled 
+          ? 'sm:top-2 sm:transform-gpu sm:scale-95' 
+          : 'sm:top-6'
+      }`} 
+    />
   );
 };
 
