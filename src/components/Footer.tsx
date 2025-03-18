@@ -26,6 +26,8 @@ const Footer = () => {
               <h3 className="font-medium mb-4">Contact</h3>
               <ul className="space-y-2">
                 <li><a href="mailto:sasruthagagana@gmail.com" className="text-sm text-muted-foreground hover:text-foreground transition-colors">sasruthagagana@gmail.com</a></li>
+                <li><a href="tel:+94761827887" className="text-sm text-muted-foreground hover:text-foreground transition-colors">+94 76 182 7887</a></li>
+                <li><p className="text-sm text-muted-foreground">Makola, Sri Lanka</p></li>
               </ul>
             </div>
           </div>
