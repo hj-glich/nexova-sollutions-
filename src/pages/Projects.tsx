@@ -12,7 +12,11 @@ const ProjectCard = ({ title, description, category, image, delay = 0 }) => (
     transition={{ duration: 0.7, delay }}
   >
     <div className="aspect-video w-full overflow-hidden bg-muted">
-      <div className="h-full w-full bg-gradient-to-br from-neutral-200 to-neutral-300 object-cover" />
+      {image ? (
+        <img src={image} alt={title} className="h-full w-full object-cover transition-transform group-hover:scale-105" />
+      ) : (
+        <div className="h-full w-full bg-gradient-to-br from-neutral-200 to-neutral-300 object-cover" />
+      )}
     </div>
     <div className="p-6">
       <div className="flex items-center justify-between">
@@ -48,31 +52,37 @@ const Projects = () => {
       title: "Velocity Commerce Platform",
       description: "A modern e-commerce solution with integrated analytics and customer behavior tracking for improved conversion rates.",
       category: "E-commerce",
+      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80"
     },
     {
       title: "MindfulTech Dashboard",
       description: "A wellness application dashboard featuring meditation tracking, mood journaling, and personalized recommendations.",
       category: "Health & Wellness",
+      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80"
     },
     {
       title: "EcoTrack Mobile App",
       description: "A sustainability platform that helps users track and reduce their carbon footprint with gamification elements.",
       category: "Sustainability",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80"
     },
     {
       title: "MetroGo Transit Portal",
       description: "A public transportation solution that integrates real-time scheduling, route planning, and community feedback.",
       category: "Transportation",
+      image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=800&q=80"
     },
     {
       title: "ArtisanLink Marketplace",
       description: "A peer-to-peer marketplace connecting artisans with customers, featuring secure transactions and creator stories.",
       category: "Marketplace",
+      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80"
     },
     {
       title: "FinVision Analytics Suite",
       description: "A financial analytics platform with personalized insights, investment tracking, and goal setting features.",
       category: "Finance",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80"
     },
   ];
 
@@ -114,6 +124,7 @@ const Projects = () => {
                 title={project.title} 
                 description={project.description} 
                 category={project.category}
+                image={project.image}
                 delay={index * 0.1 + 0.3}
               />
             ))}
