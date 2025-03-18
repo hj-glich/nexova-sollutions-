@@ -105,7 +105,7 @@ const Projects = () => {
               <button className="rounded-full bg-muted text-muted-foreground px-4 py-1 text-sm">Mobile</button>
               <button className="rounded-full bg-muted text-muted-foreground px-4 py-1 text-sm">Design</button>
             </motion.div>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project, index) => (
