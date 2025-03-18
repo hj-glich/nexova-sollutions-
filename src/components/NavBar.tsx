@@ -1,5 +1,5 @@
 
-import { Home, Briefcase, FileText, Rocket } from 'lucide-react';
+import { Home, Briefcase, User } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { TubelightNavBar } from './ui/tubelight-navbar';
@@ -9,7 +9,7 @@ const NavBar = () => {
   const [scrolled, setScrolled] = useState(false);
   
   const navItems = [{
-    name: 'Index',
+    name: 'Home',
     url: '/',
     icon: Home
   }, {
@@ -17,13 +17,9 @@ const NavBar = () => {
     url: '/projects',
     icon: Briefcase
   }, {
-    name: 'Agency',
-    url: '/agency',
-    icon: Rocket
-  }, {
-    name: 'Resources',
-    url: '/resources',
-    icon: FileText
+    name: 'About',
+    url: '/about',
+    icon: User
   }];
   
   useEffect(() => {

@@ -6,7 +6,7 @@ import ServicesSection from '@/components/ServicesSection';
 import ProcessSection from '@/components/ProcessSection';
 import Footer from '@/components/Footer';
 
-const Index = () => {
+const Home = () => {
   const [scrollY, setScrollY] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   
@@ -50,4 +50,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Home;
