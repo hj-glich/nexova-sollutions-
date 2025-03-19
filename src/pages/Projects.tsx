@@ -1,10 +1,10 @@
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
-import { ArrowDown, ArrowUpRight, Calendar, Users } from 'lucide-react';
+import { ArrowDown, Calendar, Code, Globe, Layout, MessageSquare, Smartphone } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { projectsData } from '@/data/projects';
+import { BentoCard, BentoGrid } from '@/components/ui/bento-grid';
 
 const ProjectHero = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -252,49 +252,55 @@ const ProjectHero = () => {
   );
 };
 
-const ProjectCard = ({ id, title, description, category, image, delay = 0 }) => (
-  <motion.div 
-    className="group overflow-hidden rounded-lg border bg-background transition-all hover:shadow-lg"
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.7, delay }}
-  >
-    <Link to={`/projects/${id}`}>
-      <div className="aspect-video w-full overflow-hidden bg-muted">
-        {image ? (
-          <img src={image} alt={title} className="h-full w-full object-cover transition-transform group-hover:scale-105" />
-        ) : (
-          <div className="h-full w-full bg-gradient-to-br from-neutral-200 to-neutral-300 object-cover" />
-        )}
-      </div>
-      <div className="p-6">
-        <div className="flex items-center justify-between">
-          <span className="text-xs text-muted-foreground">{category}</span>
-          <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
-            2025
-          </span>
-        </div>
-        <h3 className="mt-3 text-xl font-display font-semibold">{title}</h3>
-        <p className="mt-2 line-clamp-3 text-sm text-muted-foreground">{description}</p>
-        <div className="mt-4 flex items-center justify-between">
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
-            <div className="flex items-center gap-1">
-              <Calendar size={14} />
-              <span>3 months</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <Users size={14} />
-              <span>Team of 4</span>
-            </div>
-          </div>
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary transition-all group-hover:bg-primary group-hover:text-white">
-            <ArrowUpRight size={16} />
-          </div>
-        </div>
-      </div>
-    </Link>
-  </motion.div>
-);
+const getCategoryIcon = (category: string) => {
+  switch (category) {
+    case 'Web':
+    case 'E-commerce':
+      return Globe;
+    case 'Mobile':
+    case 'Health & Wellness':
+      return Smartphone;
+    case 'Design':
+    case 'Marketplace':
+      return Layout;
+    case 'Development':
+    case 'Finance':
+      return Code;
+    case 'Sustainability':
+    case 'Transportation':
+      return Calendar;
+    default:
+      return MessageSquare;
+  }
+};
+
+const getCategoryBackground = (category: string) => {
+  const gradients: Record<string, string> = {
+    'E-commerce': 'from-purple-100 to-indigo-100',
+    'Health & Wellness': 'from-green-100 to-teal-100',
+    'Sustainability': 'from-emerald-100 to-green-100',
+    'Transportation': 'from-blue-100 to-sky-100',
+    'Marketplace': 'from-amber-100 to-yellow-100',
+    'Finance': 'from-slate-100 to-gray-100',
+  };
+
+  const gradient = gradients[category] || 'from-purple-100 to-blue-100';
+  return (
+    <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-50`}></div>
+  );
+};
+
+const getCardLayout = (index: number) => {
+  const layouts = [
+    "md:col-span-2 md:row-span-2",
+    "md:col-span-1 md:row-span-1",
+    "md:col-span-1 md:row-span-1",
+    "md:col-span-1 md:row-span-1",
+    "md:col-span-2 md:row-span-1",
+    "md:col-span-1 md:row-span-2",
+  ];
+  return layouts[index % layouts.length];
+};
 
 const Projects = () => {
   return (
@@ -330,19 +336,23 @@ const Projects = () => {
               </motion.div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {projectsData.map((project, index) => (
-                <ProjectCard 
-                  key={project.id}
-                  id={project.id}
-                  title={project.title} 
-                  description={project.description} 
-                  category={project.category}
-                  image={project.image}
-                  delay={index * 0.1 + 0.3}
-                />
-              ))}
-            </div>
+            <BentoGrid className="lg:grid-rows-3">
+              {projectsData.map((project, index) => {
+                const Icon = getCategoryIcon(project.category);
+                return (
+                  <BentoCard
+                    key={project.id}
+                    name={project.title}
+                    description={project.description.substring(0, 120) + '...'}
+                    Icon={Icon}
+                    background={getCategoryBackground(project.category)}
+                    href={`/projects/${project.id}`}
+                    cta="View Project"
+                    className={getCardLayout(index)}
+                  />
+                );
+              })}
+            </BentoGrid>
           </div>
         </div>
       </main>
