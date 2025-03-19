@@ -32,16 +32,28 @@ const ProjectGrid = ({ category }: ProjectGridProps) => {
         {filteredProjects.map((project, index) => {
           const Icon = getCategoryIcon(project.category);
           return (
-            <BentoCard
+            <motion.div
               key={project.id}
-              name={project.title}
-              description={project.description.substring(0, 120) + '...'}
-              Icon={Icon}
-              background={getCategoryBackground(project.category)}
-              href={`/projects/${project.id}`}
-              cta="View Project"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ 
+                duration: 0.6, 
+                delay: 0.2 + (index * 0.1),
+                ease: [0.25, 0.1, 0.25, 1.0] 
+              }}
+              whileHover={{ y: -5 }}
               className={getCardLayout(index)}
-            />
+            >
+              <BentoCard
+                name={project.title}
+                description={project.description.substring(0, 120) + '...'}
+                Icon={Icon}
+                background={getCategoryBackground(project.category)}
+                href={`/projects/${project.id}`}
+                cta="View Project"
+                className=""
+              />
+            </motion.div>
           );
         })}
       </BentoGrid>

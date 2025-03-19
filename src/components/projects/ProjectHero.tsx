@@ -149,6 +149,7 @@ const ProjectHero = () => {
   const titleOpacity = Math.max(0.3, 1 - scrollPercentage * 1.5);
   const elementsOpacity = Math.max(0, 1 - scrollPercentage * 2.5);
   const taglineOpacity = Math.max(0, 1 - scrollPercentage * 2);
+  const parallaxOffset = scrollY * 0.5; // Parallax effect coefficient
   
   return (
     <section className="relative h-screen flex flex-col justify-center items-center px-6 overflow-hidden">
@@ -161,6 +162,7 @@ const ProjectHero = () => {
         style={{ 
           opacity: elementsOpacity,
           transition: 'opacity 0.5s ease',
+          transform: `translateY(${parallaxOffset * 0.2}px)`,
         }}>
         <span className="text-sm">Featured</span>
         <span className="text-sm">Since 2025</span>
@@ -171,6 +173,7 @@ const ProjectHero = () => {
         style={{ 
           opacity: titleOpacity,
           transition: 'opacity 0.5s ease',
+          transform: `translateY(${-parallaxOffset * 0.5}px)`,
         }}
       >
         <h1 
@@ -190,6 +193,7 @@ const ProjectHero = () => {
         style={{ 
           opacity: taglineOpacity,
           transition: 'opacity 0.5s ease',
+          transform: `translateY(${parallaxOffset * 0.3}px)`,
         }}
       >
         <div 
@@ -213,6 +217,7 @@ const ProjectHero = () => {
           opacity: elementsOpacity,
           transition: 'opacity 0.5s ease',
           animationDelay: '0.9s',
+          transform: `translateY(${parallaxOffset * 0.1}px)`,
         }}
       >
         <button onClick={scrollToProjects} className="flex items-center space-x-2 group">
@@ -227,6 +232,7 @@ const ProjectHero = () => {
           opacity: elementsOpacity,
           transition: 'opacity 0.5s ease',
           animationDelay: '0.9s',
+          transform: `translateY(${parallaxOffset * 0.1}px)`,
         }}
       >
         <div className="flex items-center space-x-6">
@@ -242,6 +248,7 @@ const ProjectHero = () => {
         className="absolute bottom-24 right-24 w-6 h-6 rounded-full bg-black fade-to-bg"
         style={{
           opacity: elementsOpacity,
+          transform: `translate(${parallaxOffset * 0.15}px, ${-parallaxOffset * 0.15}px)`,
         }}
       />
     </section>
