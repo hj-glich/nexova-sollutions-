@@ -60,16 +60,5 @@ export const projectsData = [
     duration: "5 months",
     team: "Team of 4"
   },
-  {
-    id: "finvision-analytics",
-    title: "FinVision Analytics Suite",
-    description: "A financial analytics platform with personalized insights, investment tracking, and goal setting features. The suite helps individuals and small businesses make informed financial decisions.",
-    category: "Finance",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
-    challenge: "Financial data is often complex and difficult to interpret for non-experts. Individuals and small businesses needed accessible analytics tools that could provide actionable insights without requiring financial expertise.",
-    solution: "FinVision translates complex financial data into visual insights and plain-language recommendations. The platform includes customizable dashboards, automated reporting, and predictive analytics for financial goal planning.",
-    technologies: ["Vue.js", "Python", "Django", "PostgreSQL", "D3.js"],
-    duration: "8 months",
-    team: "Team of 6"
-  },
+  // Removed the "FinVision Analytics Suite" project
 ];
