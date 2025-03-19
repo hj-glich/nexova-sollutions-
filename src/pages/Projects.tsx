@@ -1,9 +1,10 @@
-
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
 import { ArrowDown, ArrowUpRight, Calendar, Users } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { projectsData } from '@/data/projects';
 
 const ProjectHero = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -251,88 +252,51 @@ const ProjectHero = () => {
   );
 };
 
-const ProjectCard = ({ title, description, category, image, delay = 0 }) => (
+const ProjectCard = ({ id, title, description, category, image, delay = 0 }) => (
   <motion.div 
     className="group overflow-hidden rounded-lg border bg-background transition-all hover:shadow-lg"
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.7, delay }}
   >
-    <div className="aspect-video w-full overflow-hidden bg-muted">
-      {image ? (
-        <img src={image} alt={title} className="h-full w-full object-cover transition-transform group-hover:scale-105" />
-      ) : (
-        <div className="h-full w-full bg-gradient-to-br from-neutral-200 to-neutral-300 object-cover" />
-      )}
-    </div>
-    <div className="p-6">
-      <div className="flex items-center justify-between">
-        <span className="text-xs text-muted-foreground">{category}</span>
-        <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
-          2025
-        </span>
+    <Link to={`/projects/${id}`}>
+      <div className="aspect-video w-full overflow-hidden bg-muted">
+        {image ? (
+          <img src={image} alt={title} className="h-full w-full object-cover transition-transform group-hover:scale-105" />
+        ) : (
+          <div className="h-full w-full bg-gradient-to-br from-neutral-200 to-neutral-300 object-cover" />
+        )}
       </div>
-      <h3 className="mt-3 text-xl font-display font-semibold">{title}</h3>
-      <p className="mt-2 line-clamp-3 text-sm text-muted-foreground">{description}</p>
-      <div className="mt-4 flex items-center justify-between">
-        <div className="flex items-center gap-4 text-sm text-muted-foreground">
-          <div className="flex items-center gap-1">
-            <Calendar size={14} />
-            <span>3 months</span>
+      <div className="p-6">
+        <div className="flex items-center justify-between">
+          <span className="text-xs text-muted-foreground">{category}</span>
+          <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+            2025
+          </span>
+        </div>
+        <h3 className="mt-3 text-xl font-display font-semibold">{title}</h3>
+        <p className="mt-2 line-clamp-3 text-sm text-muted-foreground">{description}</p>
+        <div className="mt-4 flex items-center justify-between">
+          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+            <div className="flex items-center gap-1">
+              <Calendar size={14} />
+              <span>3 months</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <Users size={14} />
+              <span>Team of 4</span>
+            </div>
           </div>
-          <div className="flex items-center gap-1">
-            <Users size={14} />
-            <span>Team of 4</span>
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary transition-all group-hover:bg-primary group-hover:text-white">
+            <ArrowUpRight size={16} />
           </div>
         </div>
-        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary transition-all group-hover:bg-primary group-hover:text-white">
-          <ArrowUpRight size={16} />
-        </div>
       </div>
-    </div>
+    </Link>
   </motion.div>
 );
 
 const Projects = () => {
-  const projects = [
-    {
-      title: "Velocity Commerce Platform",
-      description: "A modern e-commerce solution with integrated analytics and customer behavior tracking for improved conversion rates.",
-      category: "E-commerce",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      title: "MindfulTech Dashboard",
-      description: "A wellness application dashboard featuring meditation tracking, mood journaling, and personalized recommendations.",
-      category: "Health & Wellness",
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      title: "EcoTrack Mobile App",
-      description: "A sustainability platform that helps users track and reduce their carbon footprint with gamification elements.",
-      category: "Sustainability",
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      title: "MetroGo Transit Portal",
-      description: "A public transportation solution that integrates real-time scheduling, route planning, and community feedback.",
-      category: "Transportation",
-      image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      title: "ArtisanLink Marketplace",
-      description: "A peer-to-peer marketplace connecting artisans with customers, featuring secure transactions and creator stories.",
-      category: "Marketplace",
-      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      title: "FinVision Analytics Suite",
-      description: "A financial analytics platform with personalized insights, investment tracking, and goal setting features.",
-      category: "Finance",
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80"
-    },
-  ];
-
   return (
     <div className="min-h-screen">
       <NavBar />
@@ -367,9 +331,10 @@ const Projects = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {projects.map((project, index) => (
+              {projectsData.map((project, index) => (
                 <ProjectCard 
-                  key={index} 
+                  key={project.id}
+                  id={project.id}
                   title={project.title} 
                   description={project.description} 
                   category={project.category}

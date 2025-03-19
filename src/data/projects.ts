@@ -1,0 +1,75 @@
+
+export const projectsData = [
+  {
+    id: "velocity-commerce",
+    title: "Velocity Commerce Platform",
+    description: "A modern e-commerce solution with integrated analytics and customer behavior tracking for improved conversion rates. The platform provides merchants with actionable insights and smart inventory management while offering customers a seamless shopping experience across devices.",
+    category: "E-commerce",
+    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80",
+    challenge: "Traditional e-commerce platforms often lack robust analytics and customer behavior tracking, making it difficult for merchants to optimize their stores for maximum conversion. Additionally, inventory management across multiple channels presented significant challenges for growing businesses.",
+    solution: "We developed Velocity Commerce with a modular architecture that integrates seamlessly with existing business systems. The platform features real-time analytics dashboard, behavior-based recommendation engine, and automated inventory management across all sales channels.",
+    technologies: ["React", "Node.js", "MongoDB", "Redis", "AWS"],
+    duration: "6 months",
+    team: "Team of 6"
+  },
+  {
+    id: "mindfultech-dashboard",
+    title: "MindfulTech Dashboard",
+    description: "A wellness application dashboard featuring meditation tracking, mood journaling, and personalized recommendations. The application helps users maintain mental wellness through consistent mindfulness practices.",
+    category: "Health & Wellness",
+    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80",
+    challenge: "The wellness app market is saturated with solutions that fail to provide personalized experiences or lack scientific backing. Users needed a comprehensive tool that could adapt to their unique needs while providing evidence-based interventions.",
+    solution: "MindfulTech combines user-friendly design with advanced machine learning algorithms to deliver personalized meditation and wellness recommendations. The platform includes progress tracking, mood analysis, and integration with wearable devices.",
+    technologies: ["React Native", "Firebase", "TensorFlow", "Swift", "Kotlin"],
+    duration: "4 months",
+    team: "Team of 4"
+  },
+  {
+    id: "ecotrack-mobile",
+    title: "EcoTrack Mobile App",
+    description: "A sustainability platform that helps users track and reduce their carbon footprint with gamification elements. The app makes environmental consciousness fun and accessible to everyone.",
+    category: "Sustainability",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
+    challenge: "Environmental impact tracking tools are often complex and unintuitive, discouraging regular use. There was a need for an engaging solution that would motivate users to make sustainable choices in their daily lives.",
+    solution: "EcoTrack introduces gamification elements to sustainability tracking, allowing users to earn rewards for eco-friendly actions. The app includes a social component for community challenges and visual representations of environmental impact.",
+    technologies: ["Flutter", "Dart", "Google Cloud", "GraphQL"],
+    duration: "5 months",
+    team: "Team of 5"
+  },
+  {
+    id: "metrogo-transit",
+    title: "MetroGo Transit Portal",
+    description: "A public transportation solution that integrates real-time scheduling, route planning, and community feedback. The portal helps commuters navigate urban transit systems efficiently.",
+    category: "Transportation",
+    image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=800&q=80",
+    challenge: "Urban commuters faced difficulties with unreliable transit information and inefficient route planning, resulting in wasted time and frustration. Transit authorities needed a better way to communicate service changes and gather user feedback.",
+    solution: "MetroGo consolidates data from multiple transit providers to offer accurate, real-time information through an intuitive interface. The platform features customizable alerts, multi-modal route planning, and an anonymous feedback system for continuous improvement.",
+    technologies: ["Angular", "TypeScript", "Express.js", "PostgreSQL", "Redis"],
+    duration: "7 months",
+    team: "Team of 7"
+  },
+  {
+    id: "artisanlink-marketplace",
+    title: "ArtisanLink Marketplace",
+    description: "A peer-to-peer marketplace connecting artisans with customers, featuring secure transactions and creator stories. The platform supports small business owners and traditional craftspeople.",
+    category: "Marketplace",
+    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80",
+    challenge: "Traditional artisans often struggle to reach global markets and establish digital presence. Existing marketplaces rarely highlight creator stories or provide adequate support for handmade goods sellers.",
+    solution: "ArtisanLink provides a dedicated platform for craftspeople to showcase their work, share their stories, and connect with appreciative customers. The marketplace includes secure payment processing, shipping integration, and storytelling features.",
+    technologies: ["Next.js", "Stripe", "Sanity CMS", "Vercel", "Tailwind CSS"],
+    duration: "5 months",
+    team: "Team of 4"
+  },
+  {
+    id: "finvision-analytics",
+    title: "FinVision Analytics Suite",
+    description: "A financial analytics platform with personalized insights, investment tracking, and goal setting features. The suite helps individuals and small businesses make informed financial decisions.",
+    category: "Finance",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
+    challenge: "Financial data is often complex and difficult to interpret for non-experts. Individuals and small businesses needed accessible analytics tools that could provide actionable insights without requiring financial expertise.",
+    solution: "FinVision translates complex financial data into visual insights and plain-language recommendations. The platform includes customizable dashboards, automated reporting, and predictive analytics for financial goal planning.",
+    technologies: ["Vue.js", "Python", "Django", "PostgreSQL", "D3.js"],
+    duration: "8 months",
+    team: "Team of 6"
+  },
+];
