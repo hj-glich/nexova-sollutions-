@@ -7,6 +7,7 @@ import ProjectGrid from '@/components/projects/ProjectGrid';
 import { projectsData } from '@/data/projects';
 import { motion } from 'framer-motion';
 import LoaderOne from '@/components/ui/loader-one';
+import HeroSection from '@/components/HeroSection';
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -16,6 +17,15 @@ const Projects = () => {
   const uniqueCategories = Array.from(
     new Set(projectsData.map(project => project.category))
   );
+
+  const heroConfig = {
+    title: "Projects",
+    taglinePrefix: "Transforming ideas into",
+    taglineEmphasis: "exceptional digital experiences",
+    scrollText: "Explore Our Work",
+    rightText: "Browse Categories",
+    scrollElementId: "projects-grid"
+  };
 
   useEffect(() => {
     // Simulate loading for 1 second
@@ -38,9 +48,14 @@ const Projects = () => {
     <div className="min-h-screen bg-[#e5e5e5]">
       <NavBar />
       <main>
-        <div className="h-[40vh] flex items-center justify-center bg-[#e5e5e5]">
-          <h1 className="text-7xl md:text-8xl font-display font-bold">Projects</h1>
-        </div>
+        <HeroSection
+          title={heroConfig.title}
+          taglinePrefix={heroConfig.taglinePrefix}
+          taglineEmphasis={heroConfig.taglineEmphasis}
+          scrollText={heroConfig.scrollText}
+          rightText={heroConfig.rightText}
+          scrollElementId={heroConfig.scrollElementId}
+        />
         
         <motion.div 
           className="px-6 md:px-8 py-16" 

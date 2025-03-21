@@ -2,7 +2,23 @@
 import { ArrowDown } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  title?: string;
+  taglinePrefix?: string;
+  taglineEmphasis?: string;
+  scrollText?: string;
+  rightText?: string;
+  scrollElementId?: string;
+}
+
+const HeroSection = ({
+  title = "NexOva",
+  taglinePrefix = "Bringing brands to life through",
+  taglineEmphasis = "creative web solutions",
+  scrollText = "Scroll to Explore",
+  rightText = "Featured Projects",
+  scrollElementId = "services-section"
+}: HeroSectionProps) => {
   const [scrollY, setScrollY] = useState(0);
   
   useEffect(() => {
@@ -14,10 +30,10 @@ const HeroSection = () => {
     return () => window.removeEventListener('scroll', handleScrollEffect);
   }, []);
   
-  const scrollToExplore = () => {
-    const servicesSection = document.getElementById('services-section');
-    if (servicesSection) {
-      servicesSection.scrollIntoView({
+  const scrollToElement = () => {
+    const targetElement = document.getElementById(scrollElementId);
+    if (targetElement) {
+      targetElement.scrollIntoView({
         behavior: 'smooth'
       });
     }
@@ -44,17 +60,17 @@ const HeroSection = () => {
             color: 'black',
           }}
         >
-          NexOva
+          {title}
         </h1>
       </div>
 
       <div className="absolute bottom-32 left-0 right-0">
         <div className="max-w-3xl mx-auto text-center px-8">
           <h2 className="text-xl md:text-2xl font-medium">
-            Bringing brands to life through
+            {taglinePrefix}
           </h2>
           <p className="text-xl md:text-2xl font-display italic">
-            creative web solutions
+            {taglineEmphasis}
           </p>
         </div>
       </div>
@@ -63,9 +79,9 @@ const HeroSection = () => {
         className="absolute bottom-10 left-10 flex items-center space-x-2"
         style={{ opacity: elementsOpacity }}
       >
-        <button onClick={scrollToExplore} className="flex items-center space-x-2 group">
+        <button onClick={scrollToElement} className="flex items-center space-x-2 group">
           <ArrowDown size={20} className="group-hover:translate-y-1 transition-transform" />
-          <span className="text-sm font-medium">Scroll to Explore</span>
+          <span className="text-sm font-medium">{scrollText}</span>
         </button>
       </div>
 
@@ -73,7 +89,7 @@ const HeroSection = () => {
         className="absolute bottom-10 right-10"
         style={{ opacity: elementsOpacity }}
       >
-        <span className="text-sm font-medium">Featured Projects</span>
+        <span className="text-sm font-medium">{rightText}</span>
       </div>
     </section>
   );
