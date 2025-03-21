@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const LoaderOne = () => {
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
             <div className="flex items-center justify-center gap-1">
                 {[...Array(3)].map((_, i) => (
                     <motion.div

@@ -34,12 +34,12 @@ const Projects = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-900 text-white">
       <NavBar />
       <main>
         <ProjectHero />
         <motion.div 
-          className="px-6 md:px-8 py-16" 
+          className="px-6 md:px-8 py-16 bg-gray-900" 
           id="projects-grid"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
