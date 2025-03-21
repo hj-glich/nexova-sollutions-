@@ -1,6 +1,6 @@
 
 import { motion } from 'framer-motion';
-import { BentoCard, BentoGrid } from '@/components/ui/bento-grid';
+import { BentoItem, BentoGrid } from '@/components/ui/bento-grid';
 import { getCategoryIcon, getCategoryBackground, getCardLayout } from './CategoryIcon';
 import { projectsData } from '@/data/projects';
 
@@ -13,6 +13,28 @@ const ProjectGrid = ({ category }: ProjectGridProps) => {
   const filteredProjects = category === 'All' 
     ? projectsData 
     : projectsData.filter(project => project.category === category);
+
+  // Convert projects to BentoItem format
+  const bentoItems: BentoItem[] = filteredProjects.map((project, index) => {
+    const Icon = getCategoryIcon(project.category);
+    return {
+      title: project.title,
+      description: project.description.substring(0, 120) + '...',
+      icon: <Icon className={`w-4 h-4 ${
+        project.category === 'E-commerce' ? 'text-blue-500' :
+        project.category === 'Health & Wellness' ? 'text-emerald-500' :
+        project.category === 'Marketplace' ? 'text-purple-500' :
+        'text-sky-500'
+      }`} />,
+      status: 'Active', // Default status since it doesn't exist in projectsData
+      tags: [project.category],
+      meta: `Project #${project.id}`,
+      cta: "View Project",
+      colSpan: index % 3 === 0 ? 2 : 1,
+      hasPersistentHover: index % 4 === 0,
+      href: `/projects/${project.id}`
+    };
+  });
 
   return (
     <>
@@ -28,35 +50,7 @@ const ProjectGrid = ({ category }: ProjectGridProps) => {
         </p>
       </motion.div>
 
-      <BentoGrid className="lg:grid-rows-3">
-        {filteredProjects.map((project, index) => {
-          const Icon = getCategoryIcon(project.category);
-          return (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ 
-                duration: 0.6, 
-                delay: 0.2 + (index * 0.1),
-                ease: [0.25, 0.1, 0.25, 1.0] 
-              }}
-              whileHover={{ y: -5 }}
-              className={getCardLayout(index)}
-            >
-              <BentoCard
-                name={project.title}
-                description={project.description.substring(0, 120) + '...'}
-                Icon={Icon}
-                background={getCategoryBackground(project.category)}
-                href={`/projects/${project.id}`}
-                cta="View Project"
-                className=""
-              />
-            </motion.div>
-          );
-        })}
-      </BentoGrid>
+      <BentoGrid items={bentoItems} className="lg:grid-rows-3" />
     </>
   );
 };
