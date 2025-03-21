@@ -9,46 +9,36 @@ interface CategoryFiltersProps {
 
 const CategoryFilters = ({ 
   activeCategory, 
-  setActiveCategory,
-  categories
+  setActiveCategory, 
+  categories 
 }: CategoryFiltersProps) => {
   return (
-    <motion.div
-      className="flex gap-2 flex-wrap"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8, delay: 0.2 }}
-    >
-      <motion.button 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className={`rounded-full ${activeCategory === 'All' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'} px-4 py-1 text-sm`}
+    <div className="flex flex-wrap justify-center items-center gap-3">
+      <button
         onClick={() => setActiveCategory('All')}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        className={`px-4 py-2 text-sm rounded-full transition-colors ${
+          activeCategory === 'All' 
+            ? 'bg-black text-white' 
+            : 'bg-black/5 text-black/70 hover:bg-black/10'
+        }`}
       >
         All
-      </motion.button>
+      </button>
       
-      {categories.map((category, index) => (
-        <motion.button 
+      {categories.map(category => (
+        <button
           key={category}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ 
-            duration: 0.5, 
-            delay: 0.1 + (index * 0.05) // Staggered animation
-          }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className={`rounded-full ${activeCategory === category ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'} px-4 py-1 text-sm`}
           onClick={() => setActiveCategory(category)}
+          className={`px-4 py-2 text-sm rounded-full transition-colors ${
+            activeCategory === category 
+              ? 'bg-black text-white' 
+              : 'bg-black/5 text-black/70 hover:bg-black/10'
+          }`}
         >
           {category}
-        </motion.button>
+        </button>
       ))}
-    </motion.div>
+    </div>
   );
 };
 

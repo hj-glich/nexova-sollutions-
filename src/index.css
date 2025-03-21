@@ -37,25 +37,8 @@
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 0 0% 26%;
-    --sidebar-primary: 0 0% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 0 0% 96%;
-    --sidebar-accent-foreground: 0 0% 10%;
-    --sidebar-border: 0 0% 91%;
-    --sidebar-ring: 217 91% 60%;
-
-    /* Vintage text variables - updated to black */
-    --vintage-text: 0 0% 0%;
-    --vintage-text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
-  }
-
-  .dark {
-    --background: 0 0% 10%;
-    --foreground: 0 0% 98%;
-
-    /* ... keep existing code (dark mode variables) */
+    --nexova-light: 0 0% 90%;
+    --nexova-dark: 0 0% 10%;
   }
 }
 
@@ -69,33 +52,12 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-[#e5e5e5] text-foreground font-sans antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-display tracking-tight;
   }
-}
-
-.navbar-item {
-  position: relative;
-  transition: color 0.3s ease;
-}
-
-.navbar-item::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  background-color: currentColor;
-  transition: width 0.3s ease;
-}
-
-.navbar-item:hover::after,
-.navbar-item.active::after {
-  width: 100%;
 }
 
 .smooth-transition {
@@ -116,17 +78,4 @@
   60% {
     transform: translateY(-5px);
   }
-}
-
-/* Vintage text styles - updated to black */
-.vintage-text {
-  color: hsl(var(--vintage-text));
-  text-shadow: var(--vintage-text-shadow);
-  font-family: 'Space Grotesk', serif;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-}
-
-.fade-to-bg {
-  transition: opacity 0.5s ease, transform 0.5s ease;
 }

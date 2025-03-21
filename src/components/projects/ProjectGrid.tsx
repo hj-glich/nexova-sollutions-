@@ -1,7 +1,7 @@
 
 import { motion } from 'framer-motion';
 import { BentoItem, BentoGrid } from '@/components/ui/bento-grid';
-import { getCategoryIcon, getCategoryBackground, getCardLayout } from './CategoryIcon';
+import { getCategoryIcon } from './CategoryIcon';
 import { projectsData } from '@/data/projects';
 
 interface ProjectGridProps {
@@ -26,7 +26,7 @@ const ProjectGrid = ({ category }: ProjectGridProps) => {
         project.category === 'Marketplace' ? 'text-purple-500' :
         'text-sky-500'
       }`} />,
-      status: 'Active', // Default status since it doesn't exist in projectsData
+      status: 'Active',
       tags: [project.category],
       meta: `Project #${project.id}`,
       cta: "View Project",
@@ -37,21 +37,9 @@ const ProjectGrid = ({ category }: ProjectGridProps) => {
   });
 
   return (
-    <>
-      <motion.div
-        className="mb-16"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">Our Featured Work</h2>
-        <p className="text-xl text-muted-foreground max-w-2xl">
-          Browse our latest work showcasing our expertise in design and development.
-        </p>
-      </motion.div>
-
+    <div className="space-y-16">
       <BentoGrid items={bentoItems} className="lg:grid-rows-3" />
-    </>
+    </div>
   );
 };
 

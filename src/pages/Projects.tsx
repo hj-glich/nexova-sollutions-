@@ -2,38 +2,22 @@
 import { useState, useEffect } from 'react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
-import ProjectHero from '@/components/projects/ProjectHero';
 import CategoryFilters from '@/components/projects/CategoryFilters';
 import ProjectGrid from '@/components/projects/ProjectGrid';
 import { projectsData } from '@/data/projects';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import LoaderOne from '@/components/ui/loader-one';
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const [loading, setLoading] = useState(true);
-  const { scrollY } = useScroll();
-  
-  // Parallax transform values
-  const titleY = useTransform(scrollY, [0, 300], [0, -50]);
-  const opacity = useTransform(scrollY, [0, 200], [1, 0]);
   
   // Extract unique categories from projects
   const uniqueCategories = Array.from(
     new Set(projectsData.map(project => project.category))
   );
 
-  // Handle smooth scrolling when URL has hash
   useEffect(() => {
-    if (window.location.hash) {
-      const element = document.getElementById(window.location.hash.substring(1));
-      if (element) {
-        setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-      }
-    }
-
     // Simulate loading for 1 second
     const timer = setTimeout(() => {
       setLoading(false);
@@ -44,17 +28,20 @@ const Projects = () => {
 
   if (loading) {
     return (
-      <div className="fixed inset-0 bg-white flex items-center justify-center z-50">
+      <div className="fixed inset-0 bg-[#e5e5e5] flex items-center justify-center z-50">
         <LoaderOne />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#e5e5e5]">
       <NavBar />
       <main>
-        <ProjectHero />
+        <div className="h-[40vh] flex items-center justify-center bg-[#e5e5e5]">
+          <h1 className="text-7xl md:text-8xl font-display font-bold">Projects</h1>
+        </div>
+        
         <motion.div 
           className="px-6 md:px-8 py-16" 
           id="projects-grid"
@@ -63,16 +50,13 @@ const Projects = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <div className="max-w-7xl mx-auto">
-            <motion.div 
-              className="flex items-center justify-between mb-8"
-              style={{ y: titleY }}
-            >
+            <div className="flex items-center justify-center mb-12">
               <CategoryFilters 
                 activeCategory={activeCategory}
                 setActiveCategory={setActiveCategory}
                 categories={uniqueCategories}
               />
-            </motion.div>
+            </div>
             
             <ProjectGrid category={activeCategory} />
           </div>

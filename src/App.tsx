@@ -9,6 +9,9 @@ import Home from "./pages/Index";
 import Projects from "./pages/Projects";
 import ProjectDetail from "./pages/ProjectDetail";
 import About from "./pages/About";
+import Agency from "./pages/Agency";
+import Resources from "./pages/Resources";
+import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import LoaderOne from "./components/ui/loader-one";
 
@@ -32,12 +35,19 @@ const AppRoutes = () => {
 
   return (
     <>
-      {isLoading && <LoaderOne />}
+      {isLoading && (
+        <div className="fixed inset-0 bg-[#e5e5e5] flex items-center justify-center z-50">
+          <LoaderOne />
+        </div>
+      )}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:id" element={<ProjectDetail />} />
         <Route path="/about" element={<About />} />
+        <Route path="/agency" element={<Agency />} />
+        <Route path="/resources" element={<Resources />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
