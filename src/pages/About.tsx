@@ -1,9 +1,7 @@
-
 import { useEffect, useRef, useState } from 'react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import HeroSection from '@/components/HeroSection';
-
 const About = () => {
   const heroConfig = {
     title: "About",
@@ -19,36 +17,32 @@ const About = () => {
   const valuesRef = useRef<HTMLDivElement>(null);
   const teamRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
-  
+
   // States to track if elements are visible
   const [storyVisible, setStoryVisible] = useState(false);
   const [valuesVisible, setValuesVisible] = useState(false);
   const [teamVisible, setTeamVisible] = useState(false);
   const [contactVisible, setContactVisible] = useState(false);
-
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.target === storyRef.current) {
-            setStoryVisible(entry.isIntersecting);
-          } else if (entry.target === valuesRef.current) {
-            setValuesVisible(entry.isIntersecting);
-          } else if (entry.target === teamRef.current) {
-            setTeamVisible(entry.isIntersecting);
-          } else if (entry.target === contactRef.current) {
-            setContactVisible(entry.isIntersecting);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.target === storyRef.current) {
+          setStoryVisible(entry.isIntersecting);
+        } else if (entry.target === valuesRef.current) {
+          setValuesVisible(entry.isIntersecting);
+        } else if (entry.target === teamRef.current) {
+          setTeamVisible(entry.isIntersecting);
+        } else if (entry.target === contactRef.current) {
+          setContactVisible(entry.isIntersecting);
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
     if (storyRef.current) observer.observe(storyRef.current);
     if (valuesRef.current) observer.observe(valuesRef.current);
     if (teamRef.current) observer.observe(teamRef.current);
     if (contactRef.current) observer.observe(contactRef.current);
-
     return () => {
       if (storyRef.current) observer.unobserve(storyRef.current);
       if (valuesRef.current) observer.unobserve(valuesRef.current);
@@ -56,29 +50,15 @@ const About = () => {
       if (contactRef.current) observer.unobserve(contactRef.current);
     };
   }, []);
-
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       <NavBar />
       <main>
-        <HeroSection
-          title={heroConfig.title}
-          taglinePrefix={heroConfig.taglinePrefix}
-          taglineEmphasis={heroConfig.taglineEmphasis}
-          scrollText={heroConfig.scrollText}
-          rightText={heroConfig.rightText}
-          scrollElementId={heroConfig.scrollElementId}
-        />
+        <HeroSection title={heroConfig.title} taglinePrefix={heroConfig.taglinePrefix} taglineEmphasis={heroConfig.taglineEmphasis} scrollText={heroConfig.scrollText} rightText={heroConfig.rightText} scrollElementId={heroConfig.scrollElementId} />
 
         <div className="px-6 md:px-8 py-16" id="about-content">
           <div className="max-w-7xl mx-auto">
             {/* Story Section */}
-            <div 
-              ref={storyRef}
-              className={`transition-all duration-1000 ease-out ${
-                storyVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
-            >
+            <div ref={storyRef} className={`transition-all duration-1000 ease-out ${storyVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <h2 className="text-5xl md:text-6xl font-display font-bold mb-16">Our Story</h2>
               <div className="grid md:grid-cols-2 gap-12 mb-24">
                 <div className="space-y-6">
@@ -98,12 +78,7 @@ const About = () => {
             </div>
 
             {/* Values Section */}
-            <div 
-              ref={valuesRef}
-              className={`transition-all duration-1000 ease-out ${
-                valuesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
-            >
+            <div ref={valuesRef} className={`transition-all duration-1000 ease-out ${valuesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <h2 className="text-5xl md:text-6xl font-display font-bold mb-16">Our Values</h2>
               <div className="grid md:grid-cols-3 gap-8 mb-24">
                 <div className="p-8 border border-black/10 rounded-lg">
@@ -122,12 +97,7 @@ const About = () => {
             </div>
 
             {/* Team Section */}
-            <div 
-              ref={teamRef}
-              className={`transition-all duration-1000 ease-out ${
-                teamVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
-            >
+            <div ref={teamRef} className={`transition-all duration-1000 ease-out ${teamVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <h2 className="text-5xl md:text-6xl font-display font-bold mb-16">Our Team</h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
                 <div className="p-8 border border-black/10 rounded-lg text-center">
@@ -162,40 +132,13 @@ const About = () => {
             </div>
 
             {/* Contact Section */}
-            <div 
-              ref={contactRef}
-              className={`transition-all duration-1000 ease-out ${
-                contactVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
-            >
-              <div className="relative bg-black text-white p-12 rounded-lg mb-24">
-                <div className="absolute top-8 left-12">
-                  <span className="text-white/50">Reach Out</span>
-                </div>
-                <h2 className="text-7xl md:text-8xl font-display font-bold text-center my-24">contact</h2>
-                <div className="absolute bottom-8 right-12">
-                  <span className="text-white/50">Say Hello</span>
-                </div>
-                <div className="text-center mt-8 mb-12">
-                  <p className="text-2xl font-display mb-6">Don't let your vision wait</p>
-                  <p className="text-3xl font-display italic">Let's bring it to life</p>
-                </div>
-                <div className="flex flex-col md:flex-row justify-between items-center p-8">
-                  <a href="mailto:sasruthagagana@gmail.com" className="text-white/80 hover:text-white transition-colors mb-4 md:mb-0">
-                    sasruthagagana@gmail.com
-                  </a>
-                  <a href="tel:+94761827887" className="text-white/80 hover:text-white transition-colors">
-                    +94 76 182 7887
-                  </a>
-                </div>
-              </div>
+            <div ref={contactRef} className={`transition-all duration-1000 ease-out ${contactVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              
             </div>
           </div>
         </div>
       </main>
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default About;
