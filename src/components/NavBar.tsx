@@ -29,7 +29,7 @@ const NavBar = () => {
     <nav className={`fixed top-0 left-0 right-0 z-50 px-8 py-6 flex justify-between items-center transition-all duration-500 ${
       scrolled ? 'bg-nexova-light/80 backdrop-blur-sm' : 'bg-transparent'
     }`}>
-      <Link to="/" className="text-black flex items-center">
+      <Link to="/" className="text-white flex items-center">
         <span className="font-display text-xl font-medium">NexOva™</span>
       </Link>
       
@@ -39,7 +39,7 @@ const NavBar = () => {
             key={item.name}
             to={item.url}
             className={`relative px-2 py-1 text-sm transition-colors ${
-              location.pathname === item.url ? 'text-black bg-black/10 rounded-md' : 'text-black/70 hover:text-black'
+              location.pathname === item.url ? 'text-white bg-white/20 rounded-md' : 'text-white/70 hover:text-white'
             }`}
           >
             {item.name}
@@ -49,7 +49,7 @@ const NavBar = () => {
       
       <Link 
         to="/contact" 
-        className="border border-black rounded-full px-6 py-2 text-sm font-medium hover:bg-black hover:text-white transition-colors"
+        className="border border-white rounded-full px-6 py-2 text-sm font-medium text-white hover:bg-white hover:text-black transition-colors"
       >
         Let's Talk
       </Link>
