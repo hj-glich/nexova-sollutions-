@@ -9,8 +9,7 @@ const NavBar = () => {
   const navItems = [
     { name: 'Index', url: '/' },
     { name: 'Projects', url: '/projects' },
-    { name: 'Agency', url: '/agency' },
-    { name: 'Resources', url: '/resources' }
+    { name: 'About', url: '/about' }
   ];
   
   useEffect(() => {
