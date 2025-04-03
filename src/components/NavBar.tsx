@@ -25,11 +25,14 @@ const NavBar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
+  // Check if current page is Contact page
+  const isContactPage = location.pathname === '/contact';
+  
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 px-8 py-6 flex justify-between items-center transition-all duration-500 ${
       scrolled ? 'bg-nexova-light/80 backdrop-blur-sm' : 'bg-transparent'
     }`}>
-      <Link to="/" className="text-white flex items-center">
+      <Link to="/" className={`${isContactPage ? 'text-white' : 'text-black'} flex items-center`}>
         <span className="font-display text-xl font-medium">NexOva™</span>
       </Link>
       
@@ -39,7 +42,13 @@ const NavBar = () => {
             key={item.name}
             to={item.url}
             className={`relative px-2 py-1 text-sm transition-colors ${
-              location.pathname === item.url ? 'text-white bg-white/20 rounded-md' : 'text-white/70 hover:text-white'
+              location.pathname === item.url 
+                ? isContactPage
+                  ? 'text-white bg-white/20 rounded-md'
+                  : 'text-black bg-black/10 rounded-md'
+                : isContactPage
+                  ? 'text-white/70 hover:text-white'
+                  : 'text-black/70 hover:text-black'
             }`}
           >
             {item.name}
@@ -49,7 +58,11 @@ const NavBar = () => {
       
       <Link 
         to="/contact" 
-        className="border border-white rounded-full px-6 py-2 text-sm font-medium text-white hover:bg-white hover:text-black transition-colors"
+        className={`border rounded-full px-6 py-2 text-sm font-medium transition-colors ${
+          isContactPage 
+            ? 'border-white text-white hover:bg-white hover:text-black' 
+            : 'border-black text-black hover:bg-black hover:text-white'
+        }`}
       >
         Let's Talk
       </Link>
