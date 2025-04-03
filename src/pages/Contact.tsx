@@ -1,10 +1,8 @@
-
 import { useEffect, useRef, useState } from 'react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import { MapPin, Mail, Phone, Clock, ExternalLink } from 'lucide-react';
 import { Card } from '@/components/ui/card';
-
 const Contact = () => {
   // Refs for sections we want to animate
   const infoRef = useRef<HTMLDivElement>(null);
@@ -15,7 +13,6 @@ const Contact = () => {
   const [infoVisible, setInfoVisible] = useState(false);
   const [officeVisible, setOfficeVisible] = useState(false);
   const [connectVisible, setConnectVisible] = useState(false);
-
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -30,20 +27,16 @@ const Contact = () => {
     }, {
       threshold: 0.1
     });
-
     if (infoRef.current) observer.observe(infoRef.current);
     if (officeRef.current) observer.observe(officeRef.current);
     if (connectRef.current) observer.observe(connectRef.current);
-
     return () => {
       if (infoRef.current) observer.unobserve(infoRef.current);
       if (officeRef.current) observer.unobserve(officeRef.current);
       if (connectRef.current) observer.unobserve(connectRef.current);
     };
   }, []);
-
-  return (
-    <div className="min-h-screen bg-black text-white">
+  return <div className="min-h-screen bg-black text-white">
       <NavBar />
       <main>
         {/* Hero Section with dark theme */}
@@ -71,9 +64,7 @@ const Contact = () => {
                   <span className="text-white/70">Scroll to Explore</span>
                 </div>
                 <div>
-                  <a href="mailto:sasruthagagana@gmail.com" className="text-white/70 hover:text-white transition-colors">
-                    sasruthagagana@gmail.com
-                  </a>
+                  
                 </div>
               </div>
             </div>
@@ -191,8 +182,6 @@ const Contact = () => {
         </section>
       </main>
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Contact;
