@@ -1,10 +1,19 @@
 
 import { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
+import { Menu } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { Button } from '@/components/ui/button';
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 
 const NavBar = () => {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
+  const isMobile = useIsMobile();
   
   const navItems = [
     { name: 'Index', url: '/' },
@@ -36,36 +45,80 @@ const NavBar = () => {
         <span className="font-display text-xl font-medium">NexOva™</span>
       </Link>
       
-      <div className="flex items-center space-x-10 font-medium">
-        {navItems.map((item) => (
-          <Link
-            key={item.name}
-            to={item.url}
-            className={`relative px-2 py-1 text-sm transition-colors ${
-              location.pathname === item.url 
-                ? isContactPage
-                  ? 'text-white bg-white/20 rounded-md'
-                  : 'text-black bg-black/10 rounded-md'
-                : isContactPage
-                  ? 'text-white/70 hover:text-white'
-                  : 'text-black/70 hover:text-black'
+      {isMobile ? (
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className={`${isContactPage ? 'text-white hover:bg-white/20' : 'text-black hover:bg-black/20'}`}
+            >
+              <Menu className="h-6 w-6" />
+              <span className="sr-only">Menu</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent className="w-[240px] sm:w-[300px]">
+            <div className="py-8 flex flex-col space-y-6">
+              {navItems.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.url}
+                  className={`px-2 py-2 text-foreground text-lg font-medium ${
+                    location.pathname === item.url 
+                      ? 'bg-accent rounded-md'
+                      : 'hover:text-accent'
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              ))}
+              <Link 
+                to="/contact" 
+                className={`border rounded-full px-6 py-2 text-sm font-medium transition-colors ${
+                  isContactPage 
+                    ? 'border-foreground text-foreground hover:bg-foreground hover:text-background' 
+                    : 'border-foreground text-foreground hover:bg-foreground hover:text-background'
+                } mt-4 flex items-center justify-center`}
+              >
+                Let's Talk
+              </Link>
+            </div>
+          </SheetContent>
+        </Sheet>
+      ) : (
+        <>
+          <div className="flex items-center space-x-10 font-medium">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.url}
+                className={`relative px-2 py-1 text-sm transition-colors ${
+                  location.pathname === item.url 
+                    ? isContactPage
+                      ? 'text-white bg-white/20 rounded-md'
+                      : 'text-black bg-black/10 rounded-md'
+                    : isContactPage
+                      ? 'text-white/70 hover:text-white'
+                      : 'text-black/70 hover:text-black'
+                }`}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+          
+          <Link 
+            to="/contact" 
+            className={`border rounded-full px-6 py-2 text-sm font-medium transition-colors ${
+              isContactPage 
+                ? 'border-white text-white hover:bg-white hover:text-black' 
+                : 'border-black text-black hover:bg-black hover:text-white'
             }`}
           >
-            {item.name}
+            Let's Talk
           </Link>
-        ))}
-      </div>
-      
-      <Link 
-        to="/contact" 
-        className={`border rounded-full px-6 py-2 text-sm font-medium transition-colors ${
-          isContactPage 
-            ? 'border-white text-white hover:bg-white hover:text-black' 
-            : 'border-black text-black hover:bg-black hover:text-white'
-        }`}
-      >
-        Let's Talk
-      </Link>
+        </>
+      )}
     </nav>
   );
 };
