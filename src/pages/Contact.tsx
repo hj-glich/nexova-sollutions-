@@ -3,6 +3,7 @@ import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import { MapPin, Mail, Phone, Clock, ExternalLink } from 'lucide-react';
 import { Card } from '@/components/ui/card';
+
 const Contact = () => {
   // Refs for sections we want to animate
   const infoRef = useRef<HTMLDivElement>(null);
@@ -13,6 +14,7 @@ const Contact = () => {
   const [infoVisible, setInfoVisible] = useState(false);
   const [officeVisible, setOfficeVisible] = useState(false);
   const [connectVisible, setConnectVisible] = useState(false);
+
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -36,6 +38,7 @@ const Contact = () => {
       if (connectRef.current) observer.unobserve(connectRef.current);
     };
   }, []);
+
   return <div className="min-h-screen bg-black text-white">
       <NavBar />
       <main>
@@ -121,27 +124,42 @@ const Contact = () => {
         <section className="py-24 px-8 bg-black/90" id="our-office">
           <div className="max-w-7xl mx-auto">
             <div ref={officeRef} className={`transition-all duration-1000 ease-out ${officeVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-              <h2 className="text-5xl md:text-6xl font-display font-bold mb-16">Our Space</h2>
+              <h2 className="text-5xl md:text-6xl font-display font-bold mb-16 text-white">Our Space</h2>
               <div className="grid md:grid-cols-3 gap-8">
                 <Card className="bg-white/5 border border-white/10 p-8 hover:bg-white/10 transition-colors">
                   <h3 className="text-2xl font-display font-medium mb-4">Creative Studio</h3>
                   <p className="text-white/70 mb-6">Where ideas come to life through collaboration and innovation.</p>
-                  <div className="h-40 bg-white/10 rounded-md flex items-center justify-center">
-                    <span className="text-white/30 font-display text-xl">Studio Space</span>
+                  <div className="h-60 rounded-md overflow-hidden">
+                    <img 
+                      src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" 
+                      alt="Creative studio workspace" 
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
                   </div>
                 </Card>
                 <Card className="bg-white/5 border border-white/10 p-8 hover:bg-white/10 transition-colors">
                   <h3 className="text-2xl font-display font-medium mb-4">Meeting Hub</h3>
                   <p className="text-white/70 mb-6">A dedicated space for client meetings and project discussions.</p>
-                  <div className="h-40 bg-white/10 rounded-md flex items-center justify-center">
-                    <span className="text-white/30 font-display text-xl">Meeting Room</span>
+                  <div className="h-60 rounded-md overflow-hidden">
+                    <img 
+                      src="https://images.unsplash.com/photo-1517502884422-41eaead166d4?auto=format&fit=crop&w=800&q=80" 
+                      alt="Meeting room" 
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
                   </div>
                 </Card>
                 <Card className="bg-white/5 border border-white/10 p-8 hover:bg-white/10 transition-colors">
                   <h3 className="text-2xl font-display font-medium mb-4">Development Zone</h3>
                   <p className="text-white/70 mb-6">Where our technical team brings designs to functional reality.</p>
-                  <div className="h-40 bg-white/10 rounded-md flex items-center justify-center">
-                    <span className="text-white/30 font-display text-xl">Dev Space</span>
+                  <div className="h-60 rounded-md overflow-hidden">
+                    <img 
+                      src="https://i.postimg.cc/T1VcZvP3/main-logo.png" 
+                      alt="Development zone" 
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
                   </div>
                 </Card>
               </div>
@@ -184,4 +202,5 @@ const Contact = () => {
       <Footer />
     </div>;
 };
+
 export default Contact;
