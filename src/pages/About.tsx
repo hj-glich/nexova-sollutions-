@@ -114,20 +114,8 @@ const About = () => {
                   <h3 className="text-xl font-medium">Vishmika Rashith</h3>
                   <p className="text-black/70 mt-2">Lead Developer</p>
                 </div>
-                <div className="p-8 border border-black/10 rounded-lg text-center">
-                  <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-black/5 flex items-center justify-center">
-                    <span className="text-3xl font-display">A</span>
-                  </div>
-                  <h3 className="text-xl font-medium">Alex Rivera</h3>
-                  <p className="text-black/70 mt-2">UX Designer</p>
-                </div>
-                <div className="p-8 border border-black/10 rounded-lg text-center">
-                  <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-black/5 flex items-center justify-center">
-                    <span className="text-3xl font-display">M</span>
-                  </div>
-                  <h3 className="text-xl font-medium">Morgan Chen</h3>
-                  <p className="text-black/70 mt-2">Project Manager</p>
-                </div>
+                
+                
               </div>
             </div>
 
