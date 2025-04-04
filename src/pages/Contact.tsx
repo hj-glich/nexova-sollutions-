@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from 'react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
@@ -127,7 +128,7 @@ const Contact = () => {
               <h2 className="text-5xl md:text-6xl font-display font-bold mb-16 text-white">Our Space</h2>
               <div className="grid md:grid-cols-3 gap-8">
                 <Card className="bg-white/5 border border-white/10 p-8 hover:bg-white/10 transition-colors">
-                  <h3 className="text-2xl font-display font-medium mb-4">Creative Studio</h3>
+                  <h3 className="text-2xl font-display font-medium mb-4 text-white">Creative Studio</h3>
                   <p className="text-white/70 mb-6">Where ideas come to life through collaboration and innovation.</p>
                   <div className="h-60 rounded-md overflow-hidden">
                     <img 
@@ -139,7 +140,7 @@ const Contact = () => {
                   </div>
                 </Card>
                 <Card className="bg-white/5 border border-white/10 p-8 hover:bg-white/10 transition-colors">
-                  <h3 className="text-2xl font-display font-medium mb-4">Meeting Hub</h3>
+                  <h3 className="text-2xl font-display font-medium mb-4 text-white">Meeting Hub</h3>
                   <p className="text-white/70 mb-6">A dedicated space for client meetings and project discussions.</p>
                   <div className="h-60 rounded-md overflow-hidden">
                     <img 
@@ -151,7 +152,7 @@ const Contact = () => {
                   </div>
                 </Card>
                 <Card className="bg-white/5 border border-white/10 p-8 hover:bg-white/10 transition-colors">
-                  <h3 className="text-2xl font-display font-medium mb-4">Development Zone</h3>
+                  <h3 className="text-2xl font-display font-medium mb-4 text-white">Development Zone</h3>
                   <p className="text-white/70 mb-6">Where our technical team brings designs to functional reality.</p>
                   <div className="h-60 rounded-md overflow-hidden">
                     <img 
