@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import HeroSection from '@/components/HeroSection';
+
 const About = () => {
   const heroConfig = {
     title: "About",
@@ -11,6 +12,18 @@ const About = () => {
     rightText: "Our Values",
     scrollElementId: "about-content"
   };
+
+  // State for hero section animation
+  const [heroLoaded, setHeroLoaded] = useState(false);
+  
+  // Effect for hero animation
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setHeroLoaded(true);
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   // Refs for sections we want to animate
   const storyRef = useRef<HTMLDivElement>(null);
@@ -50,6 +63,7 @@ const About = () => {
       if (contactRef.current) observer.unobserve(contactRef.current);
     };
   }, []);
+
   return <div className="min-h-screen">
       <NavBar />
       <main>
@@ -114,8 +128,6 @@ const About = () => {
                   <h3 className="text-xl font-medium">Vishmika Rashith</h3>
                   <p className="text-black/70 mt-2">Lead Developer</p>
                 </div>
-                
-                
               </div>
             </div>
 
@@ -129,4 +141,5 @@ const About = () => {
       <Footer />
     </div>;
 };
+
 export default About;

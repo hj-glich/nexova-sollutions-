@@ -20,6 +20,7 @@ const HeroSection = ({
   scrollElementId = "services-section"
 }: HeroSectionProps) => {
   const [scrollY, setScrollY] = useState(0);
+  const [loaded, setLoaded] = useState(false);
   
   useEffect(() => {
     const handleScrollEffect = () => {
@@ -27,7 +28,16 @@ const HeroSection = ({
     };
     
     window.addEventListener('scroll', handleScrollEffect);
-    return () => window.removeEventListener('scroll', handleScrollEffect);
+    
+    // Set loaded to true after component mounts to trigger animations
+    const timer = setTimeout(() => {
+      setLoaded(true);
+    }, 100);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScrollEffect);
+      clearTimeout(timer);
+    };
   }, []);
   
   const scrollToElement = () => {
@@ -45,8 +55,8 @@ const HeroSection = ({
   return (
     <section className="relative h-screen flex flex-col justify-center items-center bg-[#e5e5e5] overflow-hidden">
       <div 
-        className="flex w-full max-w-7xl mx-auto justify-between items-start px-8" 
-        style={{ opacity: elementsOpacity }}
+        className={`flex w-full max-w-7xl mx-auto justify-between items-start px-8 transition-all duration-1000 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+        style={{ opacity: elementsOpacity, transitionDelay: '200ms' }}
       >
         <span className="text-sm">Welcome</span>
         <span className="text-sm">Est. 2025</span>
@@ -54,10 +64,11 @@ const HeroSection = ({
       
       <div className="w-full max-w-7xl mx-auto my-4 flex flex-col justify-center px-8">
         <h1 
-          className="text-[15vw] md:text-[15vw] lg:text-[15vw] font-display font-bold text-center leading-none tracking-tighter"
+          className={`text-[15vw] md:text-[15vw] lg:text-[15vw] font-display font-bold text-center leading-none tracking-tighter transition-all duration-1000 ease-out ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
           style={{
             letterSpacing: '-0.05em',
             color: 'black',
+            transitionDelay: '400ms'
           }}
         >
           {title}
@@ -66,18 +77,24 @@ const HeroSection = ({
 
       <div className="absolute bottom-32 left-0 right-0">
         <div className="max-w-3xl mx-auto text-center px-8">
-          <h2 className="text-xl md:text-2xl font-medium">
+          <h2 
+            className={`text-xl md:text-2xl font-medium transition-all duration-1000 ease-out ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+            style={{ transitionDelay: '600ms' }}
+          >
             {taglinePrefix}
           </h2>
-          <p className="text-xl md:text-2xl font-display italic">
+          <p 
+            className={`text-xl md:text-2xl font-display italic transition-all duration-1000 ease-out ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+            style={{ transitionDelay: '800ms' }}
+          >
             {taglineEmphasis}
           </p>
         </div>
       </div>
 
       <div 
-        className="absolute bottom-10 left-10 flex items-center space-x-2"
-        style={{ opacity: elementsOpacity }}
+        className={`absolute bottom-10 left-10 flex items-center space-x-2 transition-all duration-1000 ease-out ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+        style={{ opacity: elementsOpacity, transitionDelay: '1000ms' }}
       >
         <button onClick={scrollToElement} className="flex items-center space-x-2 group">
           <ArrowDown size={20} className="group-hover:translate-y-1 transition-transform" />
@@ -86,8 +103,8 @@ const HeroSection = ({
       </div>
 
       <div 
-        className="absolute bottom-10 right-10"
-        style={{ opacity: elementsOpacity }}
+        className={`absolute bottom-10 right-10 transition-all duration-1000 ease-out ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+        style={{ opacity: elementsOpacity, transitionDelay: '1000ms' }}
       >
         <span className="text-sm font-medium">{rightText}</span>
       </div>
