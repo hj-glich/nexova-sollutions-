@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 const AnimatedCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [hidden, setHidden] = useState(true);
+  const [isHovering, setIsHovering] = useState(false);
   const location = useLocation();
   
   // Actual cursor position
@@ -61,18 +62,34 @@ const AnimatedCursor = () => {
       setHidden(false);
     };
 
+    // Check if hovering over interactive elements
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const isInteractive = 
+        target.tagName.toLowerCase() === 'a' || 
+        target.tagName.toLowerCase() === 'button' || 
+        target.tagName.toLowerCase() === 'input' || 
+        target.tagName.toLowerCase() === 'textarea' || 
+        target.tagName.toLowerCase() === 'select' || 
+        target.hasAttribute('role') && target.getAttribute('role') === 'button';
+      
+      setIsHovering(isInteractive);
+    };
+
     // Start animation
     requestRef.current = requestAnimationFrame(animateCursor);
 
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseleave', handleMouseLeave);
     window.addEventListener('mouseenter', handleMouseEnter);
+    window.addEventListener('mouseover', handleMouseOver);
 
     return () => {
       document.body.style.cursor = 'auto';
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseleave', handleMouseLeave);
       window.removeEventListener('mouseenter', handleMouseEnter);
+      window.removeEventListener('mouseover', handleMouseOver);
       
       // Clean up animation frame
       if (requestRef.current) {
@@ -85,7 +102,7 @@ const AnimatedCursor = () => {
 
   return (
     <div 
-      className={`fixed pointer-events-none z-[9999] transition-all duration-100 ease-out -translate-x-1/2 -translate-y-1/2 ${
+      className={`fixed pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 ${
         isContactPage ? 'mix-blend-difference' : ''
       }`}
       style={{ 
@@ -94,12 +111,46 @@ const AnimatedCursor = () => {
         transition: 'transform 0.1s cubic-bezier(0.16, 1, 0.3, 1)',
       }}
     >
-      <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
-        isContactPage ? 'bg-white' : 'bg-black'
-      }`}>
-        <div className={`w-1.5 h-1.5 rounded-full animate-pulse ${
-          isContactPage ? 'bg-black' : 'bg-white'
-        }`}></div>
+      {/* Main cursor */}
+      <div 
+        className={`relative ${
+          isHovering ? 'scale-150 opacity-70' : 'scale-100 opacity-100'
+        } transition-all duration-200`}
+      >
+        {/* Outer ring */}
+        <div 
+          className={`absolute -inset-1 rounded-full opacity-30 blur-sm ${
+            isContactPage ? 'bg-white' : 'bg-black'
+          }`}
+        ></div>
+        
+        {/* Main cursor circle */}
+        <div 
+          className={`relative w-6 h-6 rounded-full flex items-center justify-center border-2 ${
+            isContactPage 
+              ? 'bg-transparent border-white' 
+              : 'bg-transparent border-black'
+          } transition-all duration-300`}
+        >
+          {/* Inner dot pulse */}
+          <div 
+            className={`w-1.5 h-1.5 rounded-full animate-pulse ${
+              isContactPage ? 'bg-white' : 'bg-black'
+            }`}
+          ></div>
+        </div>
+        
+        {/* Decorative dots */}
+        <div 
+          className={`absolute w-1 h-1 rounded-full -top-1 -right-1 ${
+            isContactPage ? 'bg-white' : 'bg-black'
+          }`}
+        ></div>
+        <div 
+          className={`absolute w-1 h-1 rounded-full -bottom-1 -left-1 ${
+            isContactPage ? 'bg-white' : 'bg-black'
+          }`}
+        ></div>
       </div>
     </div>
   );
