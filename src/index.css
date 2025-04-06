@@ -58,6 +58,16 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-display tracking-tight;
   }
+  
+  /* Hide cursor on all elements */
+  * {
+    cursor: none !important;
+  }
+  
+  /* Override for clickable elements to show they're interactive */
+  a, button, input, textarea, select, [role="button"] {
+    @apply hover:opacity-80 transition-opacity;
+  }
 }
 
 .smooth-transition {

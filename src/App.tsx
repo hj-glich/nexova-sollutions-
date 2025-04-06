@@ -14,6 +14,7 @@ import Resources from "./pages/Resources";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import LoaderOne from "./components/ui/loader-one";
+import AnimatedCursor from "./components/AnimatedCursor";
 
 const queryClient = new QueryClient();
 
@@ -65,6 +66,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <AnimatedCursor />
         <AppRoutes />
       </BrowserRouter>
     </TooltipProvider>
