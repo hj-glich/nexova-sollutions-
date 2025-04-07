@@ -5,7 +5,6 @@ import HeroSection from '@/components/HeroSection';
 import ServicesSection from '@/components/ServicesSection';
 import ProcessSection from '@/components/ProcessSection';
 import Footer from '@/components/Footer';
-import DoodleBackground from '@/components/DoodleBackground';
 
 const Home = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -40,7 +39,6 @@ const Home = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden">
-      <DoodleBackground />
       <NavBar />
       <main className="relative">
         <HeroSection />
