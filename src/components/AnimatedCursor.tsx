@@ -1,12 +1,13 @@
-
 import { useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const AnimatedCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [hidden, setHidden] = useState(true);
   const [isHovering, setIsHovering] = useState(false);
   const location = useLocation();
+  const isMobile = useIsMobile();
   
   // Actual cursor position
   const cursorRef = useRef({ x: 0, y: 0 });
@@ -42,6 +43,12 @@ const AnimatedCursor = () => {
   };
 
   useEffect(() => {
+    // If on mobile, don't show custom cursor and keep default
+    if (isMobile) {
+      document.body.style.cursor = 'auto';
+      return;
+    }
+
     // Hide default cursor
     document.body.style.cursor = 'none';
 
@@ -96,9 +103,10 @@ const AnimatedCursor = () => {
         cancelAnimationFrame(requestRef.current);
       }
     };
-  }, []);
+  }, [isMobile]);
 
-  if (hidden) return null;
+  // If on mobile or cursor is hidden, don't render anything
+  if (isMobile || hidden) return null;
 
   return (
     <div 

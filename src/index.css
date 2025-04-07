@@ -59,9 +59,11 @@
     @apply font-display tracking-tight;
   }
   
-  /* Hide cursor on all elements */
-  * {
-    cursor: none !important;
+  /* Hide cursor on desktop only */
+  @media (min-width: 768px) {
+    * {
+      cursor: none !important;
+    }
   }
   
   /* Override for clickable elements to show they're interactive */
