@@ -17,6 +17,7 @@ const DoodleBackground = () => {
   return (
     <div 
       className="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-[0.1] overflow-hidden"
+      style={{ position: 'fixed' }}
       aria-hidden="true"
     >
       <svg 
