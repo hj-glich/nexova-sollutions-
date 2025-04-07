@@ -16,7 +16,7 @@ const DoodleBackground = () => {
 
   return (
     <div 
-      className="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-[0.03] overflow-hidden"
+      className="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-[0.1] overflow-hidden"
       aria-hidden="true"
     >
       <svg 
@@ -29,19 +29,27 @@ const DoodleBackground = () => {
           <pattern
             id="doodle-pattern"
             patternUnits="userSpaceOnUse"
-            width="100"
-            height="100"
-            patternTransform="scale(2) rotate(0)"
+            width="50"
+            height="50"
+            patternTransform="scale(1.5) rotate(0)"
           >
-            <g fill="none" stroke={isContactPage ? '#ffffff' : '#000000'} strokeWidth="1">
-              <path d="M20,20 Q30,5 40,20 T60,20" />
-              <circle cx="40" cy="50" r="10" />
-              <line x1="70" y1="30" x2="90" y2="50" />
-              <rect x="10" y="60" width="15" height="15" />
-              <path d="M60,70 L65,80 L70,70 Z" />
-              <path d="M80,80 C85,85 90,85 90,80" />
-              <path d="M15,40 C20,35 25,35 30,40" />
-              <path d="M85,15 Q90,10 95,15" />
+            <g fill="none" stroke={isContactPage ? '#ffffff' : '#000000'} strokeWidth="1.5">
+              {/* Dots */}
+              <circle cx="10" cy="10" r="2" fill={isContactPage ? '#ffffff' : '#000000'} />
+              <circle cx="40" cy="10" r="2" fill={isContactPage ? '#ffffff' : '#000000'} />
+              <circle cx="10" cy="40" r="2" fill={isContactPage ? '#ffffff' : '#000000'} />
+              <circle cx="40" cy="40" r="2" fill={isContactPage ? '#ffffff' : '#000000'} />
+              
+              {/* Squares */}
+              <rect x="22" y="22" width="6" height="6" fill={isContactPage ? '#ffffff' : '#000000'} />
+              <rect x="5" y="22" width="4" height="4" fill={isContactPage ? '#ffffff' : '#000000'} />
+              <rect x="40" y="22" width="4" height="4" fill={isContactPage ? '#ffffff' : '#000000'} />
+              
+              {/* Lines */}
+              <line x1="15" y1="25" x2="20" y2="25" />
+              <line x1="30" y1="25" x2="35" y2="25" />
+              <line x1="25" y1="15" x2="25" y2="20" />
+              <line x1="25" y1="30" x2="25" y2="35" />
             </g>
           </pattern>
         </defs>
