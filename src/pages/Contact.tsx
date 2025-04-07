@@ -1,9 +1,9 @@
-
 import { useEffect, useRef, useState } from 'react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import { MapPin, Mail, Phone, Clock, ExternalLink } from 'lucide-react';
 import { Card } from '@/components/ui/card';
+import DoodleBackground from '@/components/DoodleBackground';
 
 const Contact = () => {
   // Refs for sections we want to animate
@@ -41,6 +41,7 @@ const Contact = () => {
   }, []);
 
   return <div className="min-h-screen bg-black text-white">
+      <DoodleBackground />
       <NavBar />
       <main>
         {/* Hero Section with dark theme */}

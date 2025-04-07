@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useEffect, useState } from 'react';
 import { projectsData } from '@/data/projects';
+import DoodleBackground from '@/components/DoodleBackground';
 
 const ProjectDetail = () => {
   const { id } = useParams();
@@ -22,6 +23,7 @@ const ProjectDetail = () => {
   if (!project) {
     return (
       <div className="min-h-screen flex items-center justify-center">
+        <DoodleBackground />
         <div className="text-center">
           <h2 className="text-2xl font-semibold mb-4">Project not found</h2>
           <Link to="/projects">
@@ -37,6 +39,7 @@ const ProjectDetail = () => {
 
   return (
     <div className="min-h-screen">
+      <DoodleBackground />
       <NavBar />
       <main>
         <div className="w-full bg-nexova-light py-20">

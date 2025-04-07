@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import HeroSection from '@/components/HeroSection';
+import DoodleBackground from '@/components/DoodleBackground';
 
 const Resources = () => {
   const [contentLoaded, setContentLoaded] = useState(false);
@@ -26,6 +27,7 @@ const Resources = () => {
 
   return (
     <div className="min-h-screen">
+      <DoodleBackground />
       <NavBar />
       <main>
         <HeroSection

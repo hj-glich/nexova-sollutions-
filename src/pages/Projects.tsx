@@ -8,6 +8,7 @@ import { projectsData } from '@/data/projects';
 import { motion } from 'framer-motion';
 import LoaderOne from '@/components/ui/loader-one';
 import HeroSection from '@/components/HeroSection';
+import DoodleBackground from '@/components/DoodleBackground';
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -46,6 +47,7 @@ const Projects = () => {
 
   return (
     <div className="min-h-screen bg-[#e5e5e5]">
+      <DoodleBackground />
       <NavBar />
       <main>
         <HeroSection
