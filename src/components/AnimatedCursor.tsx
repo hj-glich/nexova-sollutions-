@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -7,7 +6,6 @@ const AnimatedCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [hidden, setHidden] = useState(true);
   const [isHovering, setIsHovering] = useState(false);
-  const [isClicking, setIsClicking] = useState(false);
   const location = useLocation();
   const isMobile = useIsMobile();
   
@@ -71,12 +69,6 @@ const AnimatedCursor = () => {
       setHidden(false);
     };
 
-    // Mouse down effect
-    const handleMouseDown = () => {
-      setIsClicking(true);
-      setTimeout(() => setIsClicking(false), 150);
-    };
-
     // Check if hovering over interactive elements
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -98,7 +90,6 @@ const AnimatedCursor = () => {
     window.addEventListener('mouseleave', handleMouseLeave);
     window.addEventListener('mouseenter', handleMouseEnter);
     window.addEventListener('mouseover', handleMouseOver);
-    window.addEventListener('mousedown', handleMouseDown);
 
     return () => {
       document.body.style.cursor = 'auto';
@@ -106,7 +97,6 @@ const AnimatedCursor = () => {
       window.removeEventListener('mouseleave', handleMouseLeave);
       window.removeEventListener('mouseenter', handleMouseEnter);
       window.removeEventListener('mouseover', handleMouseOver);
-      window.removeEventListener('mousedown', handleMouseDown);
       
       // Clean up animation frame
       if (requestRef.current) {
@@ -117,10 +107,6 @@ const AnimatedCursor = () => {
 
   // If on mobile or cursor is hidden, don't render anything
   if (isMobile || hidden) return null;
-
-  // Calculate cursor scale based on state
-  const cursorScale = isClicking ? 'scale-75' : isHovering ? 'scale-150' : 'scale-100';
-  const cursorOpacity = isHovering ? 'opacity-70' : 'opacity-100';
 
   return (
     <div 
@@ -135,17 +121,15 @@ const AnimatedCursor = () => {
     >
       {/* Main cursor */}
       <div 
-        className={`relative ${cursorScale} ${cursorOpacity} transition-all duration-200`}
+        className={`relative ${
+          isHovering ? 'scale-150 opacity-70' : 'scale-100 opacity-100'
+        } transition-all duration-200`}
       >
         {/* Outer ring */}
         <div 
           className={`absolute -inset-1 rounded-full opacity-30 blur-sm ${
             isContactPage ? 'bg-white' : 'bg-black'
           }`}
-          style={{
-            filter: isHovering ? 'blur(4px)' : 'blur(2px)',
-            animation: isClicking ? 'pulse 0.5s ease-out' : 'none'
-          }}
         ></div>
         
         {/* Main cursor circle */}
@@ -175,31 +159,7 @@ const AnimatedCursor = () => {
             isContactPage ? 'bg-white' : 'bg-black'
           }`}
         ></div>
-        
-        {/* New trailing particle effects */}
-        <div 
-          className={`absolute w-1 h-1 rounded-full top-1 left-3 opacity-70 ${
-            isContactPage ? 'bg-white' : 'bg-black'
-          }`}
-          style={{ transform: 'translateX(-6px) scale(0.8)', opacity: '0.5' }}
-        ></div>
-        <div 
-          className={`absolute w-1 h-1 rounded-full top-3 left-1 opacity-50 ${
-            isContactPage ? 'bg-white' : 'bg-black'
-          }`}
-          style={{ transform: 'translateX(-12px) scale(0.6)', opacity: '0.3' }}
-        ></div>
       </div>
-      
-      {/* Click ripple effect */}
-      {isClicking && (
-        <div 
-          className={`absolute inset-0 rounded-full animate-ping ${
-            isContactPage ? 'bg-white' : 'bg-black'
-          } opacity-30`}
-          style={{ animation: 'ping 0.5s cubic-bezier(0, 0, 0.2, 1)' }}
-        ></div>
-      )}
     </div>
   );
 };
