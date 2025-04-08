@@ -83,8 +83,13 @@ const Projects = () => {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
-                className="rounded-xl bg-white/50 p-2 backdrop-blur-sm shadow-sm border border-black/5"
+                className="rounded-xl bg-gradient-to-br from-white/90 to-white/50 p-3 backdrop-blur-md shadow-lg border border-white/20 relative overflow-hidden"
               >
+                {/* Decorative elements */}
+                <div className="absolute top-0 left-0 w-full h-full bg-white/10 backdrop-blur-sm opacity-50"></div>
+                <div className="absolute -top-10 -right-10 w-24 h-24 bg-gradient-to-br from-purple-200/40 to-pink-200/40 rounded-full blur-xl"></div>
+                <div className="absolute -bottom-8 -left-8 w-20 h-20 bg-gradient-to-tr from-blue-200/30 to-green-200/30 rounded-full blur-xl"></div>
+                
                 <CategoryFilters 
                   activeCategory={activeCategory}
                   setActiveCategory={setActiveCategory}
