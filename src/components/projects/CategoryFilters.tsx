@@ -1,5 +1,6 @@
 
 import { motion } from 'framer-motion';
+import { TagIcon } from 'lucide-react';
 
 interface CategoryFiltersProps {
   activeCategory: string;
@@ -14,29 +15,34 @@ const CategoryFilters = ({
 }: CategoryFiltersProps) => {
   return (
     <div className="flex flex-wrap justify-center items-center gap-3">
-      <button
+      <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
         onClick={() => setActiveCategory('All')}
-        className={`px-4 py-2 text-sm rounded-full transition-colors ${
+        className={`px-5 py-2.5 text-sm rounded-full transition-all duration-300 flex items-center gap-2 ${
           activeCategory === 'All' 
-            ? 'bg-black text-white' 
+            ? 'bg-black text-white shadow-md' 
             : 'bg-black/5 text-black/70 hover:bg-black/10'
         }`}
       >
+        <TagIcon className="w-3.5 h-3.5" />
         All
-      </button>
+      </motion.button>
       
       {categories.map(category => (
-        <button
+        <motion.button
           key={category}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           onClick={() => setActiveCategory(category)}
-          className={`px-4 py-2 text-sm rounded-full transition-colors ${
+          className={`px-5 py-2.5 text-sm rounded-full transition-all duration-300 ${
             activeCategory === category 
-              ? 'bg-black text-white' 
+              ? 'bg-black text-white shadow-md' 
               : 'bg-black/5 text-black/70 hover:bg-black/10'
           }`}
         >
           {category}
-        </button>
+        </motion.button>
       ))}
     </div>
   );
