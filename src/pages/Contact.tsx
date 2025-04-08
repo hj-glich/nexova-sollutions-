@@ -87,13 +87,13 @@ const Contact = () => {
                     Our team is ready to collaborate with you to create something exceptional.
                   </p>
                   <div className="flex flex-col space-y-3">
-                    <a href="mailto:sasruthagagana@gmail.com" className="inline-flex items-center space-x-3 text-lg font-medium text-white hover:text-white/70 transition-colors">
+                    <a href="mailto:nexovadesigns@gmail.com" className="inline-flex items-center space-x-3 text-lg font-medium text-white hover:text-white/70 transition-colors">
                       <Mail className="w-5 h-5" />
-                      <span>sasruthagagana@gmail.com</span>
+                      <span>nexovadesigns@gmail.com</span>
                     </a>
-                    <a href="tel:+94761827887" className="inline-flex items-center space-x-3 text-lg font-medium text-white hover:text-white/70 transition-colors">
+                    <a href="tel:+94701058606" className="inline-flex items-center space-x-3 text-lg font-medium text-white hover:text-white/70 transition-colors">
                       <Phone className="w-5 h-5" />
-                      <span>+94 76 182 7887</span>
+                      <span>+94 70 105 8606</span>
                     </a>
                   </div>
                 </div>
@@ -191,8 +191,8 @@ const Contact = () => {
                   <p className="text-white/70">
                     For urgent matters, please contact us directly at:
                   </p>
-                  <a href="tel:+94761827887" className="text-white font-medium hover:text-white/70 transition-colors">
-                    +94 76 182 7887
+                  <a href="tel:+94701058606" className="text-white font-medium hover:text-white/70 transition-colors">
+                    +94 70 105 8606
                   </a>
                 </div>
               </div>
