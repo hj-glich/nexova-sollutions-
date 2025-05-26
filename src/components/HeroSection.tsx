@@ -34,15 +34,15 @@ const HeroSection = ({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const animationRef = useRef<number>();
+  const lastFrameTime = useRef<number>(0);
   
   useEffect(() => {
     const handleScrollEffect = () => {
       setScrollY(window.scrollY);
     };
     
-    window.addEventListener('scroll', handleScrollEffect);
+    window.addEventListener('scroll', handleScrollEffect, { passive: true });
     
-    // Set loaded to true after component mounts to trigger animations
     const timer = setTimeout(() => {
       setLoaded(true);
     }, 100);
@@ -61,7 +61,7 @@ const HeroSection = ({
       });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
@@ -80,37 +80,45 @@ const HeroSection = ({
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Initialize particles
+    // Reduced particle count for better performance
     const initParticles = () => {
       particlesRef.current = [];
-      for (let i = 0; i < 100; i++) {
+      const particleCount = Math.min(50, Math.floor((canvas.width * canvas.height) / 20000)); // Adaptive count
+      for (let i = 0; i < particleCount; i++) {
         particlesRef.current.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          size: Math.random() * 2 + 0.5,
-          speedX: (Math.random() - 0.5) * 0.5,
-          speedY: (Math.random() - 0.5) * 0.5,
-          opacity: Math.random() * 0.3 + 0.1
+          size: Math.random() * 1.5 + 0.5,
+          speedX: (Math.random() - 0.5) * 0.3,
+          speedY: (Math.random() - 0.5) * 0.3,
+          opacity: Math.random() * 0.2 + 0.05
         });
       }
     };
 
     initParticles();
 
-    const animate = () => {
+    const animate = (currentTime: number) => {
+      // Throttle to 60fps max
+      if (currentTime - lastFrameTime.current < 16) {
+        animationRef.current = requestAnimationFrame(animate);
+        return;
+      }
+      lastFrameTime.current = currentTime;
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Update and draw particles
+      // Update and draw particles with reduced complexity
       particlesRef.current.forEach((particle) => {
-        // Mouse interaction
+        // Simplified mouse interaction
         const dx = mousePosition.x * canvas.width - particle.x;
         const dy = mousePosition.y * canvas.height - particle.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
         
-        if (distance < 100) {
-          const force = (100 - distance) / 100;
-          particle.x += dx * force * 0.01;
-          particle.y += dy * force * 0.01;
+        if (distance < 80) {
+          const force = (80 - distance) / 80 * 0.005;
+          particle.x += dx * force;
+          particle.y += dy * force;
         }
 
         // Update position
@@ -128,28 +136,32 @@ const HeroSection = ({
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(0, 0, 0, ${particle.opacity})`;
         ctx.fill();
+      });
 
-        // Draw connections
-        particlesRef.current.forEach((otherParticle) => {
+      // Simplified connection drawing - only draw a few connections
+      for (let i = 0; i < particlesRef.current.length; i += 3) {
+        const particle = particlesRef.current[i];
+        for (let j = i + 1; j < Math.min(i + 4, particlesRef.current.length); j++) {
+          const otherParticle = particlesRef.current[j];
           const dx = particle.x - otherParticle.x;
           const dy = particle.y - otherParticle.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 80) {
+          if (distance < 60) {
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(otherParticle.x, otherParticle.y);
-            ctx.strokeStyle = `rgba(0, 0, 0, ${0.1 * (1 - distance / 80)})`;
+            ctx.strokeStyle = `rgba(0, 0, 0, ${0.05 * (1 - distance / 60)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
-        });
-      });
+        }
+      }
 
       animationRef.current = requestAnimationFrame(animate);
     };
 
-    animate();
+    animate(0);
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
@@ -172,48 +184,53 @@ const HeroSection = ({
   const elementsOpacity = Math.max(0, 1 - scrollPercentage * 2.5);
   
   return (
-    <section className="relative h-screen flex flex-col justify-center items-center bg-gradient-to-br from-gray-50 to-white overflow-hidden">
-      {/* Interactive Canvas Background */}
+    <section className="relative h-screen flex flex-col justify-center items-center overflow-hidden">
+      {/* Smooth Surface Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-100" />
+      
+      {/* Subtle animated surface overlay */}
+      <div 
+        className="absolute inset-0 opacity-30"
+        style={{
+          background: `
+            radial-gradient(circle at ${mousePosition.x * 100}% ${mousePosition.y * 100}%, 
+            rgba(0,0,0,0.02) 0%, transparent 50%),
+            linear-gradient(45deg, transparent 25%, rgba(0,0,0,0.01) 25%, rgba(0,0,0,0.01) 50%, transparent 50%, transparent 75%, rgba(0,0,0,0.01) 75%)
+          `,
+          backgroundSize: '60px 60px',
+          transition: 'background-position 0.3s ease-out',
+          transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px)`
+        }}
+      />
+
+      {/* Optimized Canvas Background */}
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full pointer-events-none"
-        style={{ opacity: elementsOpacity * 0.6 }}
+        style={{ opacity: elementsOpacity * 0.4 }}
       />
 
-      {/* Floating geometric shapes */}
+      {/* Floating geometric shapes - reduced and optimized */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
-          className="absolute w-96 h-96 rounded-full bg-gradient-to-r from-blue-100/20 to-purple-100/20 blur-3xl"
+          className="absolute w-80 h-80 rounded-full bg-gradient-to-r from-blue-50/30 to-purple-50/30 blur-3xl will-change-transform"
           style={{
-            top: '10%',
-            right: '10%',
-            transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px)`,
-            transition: 'transform 0.3s ease-out'
+            top: '15%',
+            right: '15%',
+            transform: `translate3d(${mousePosition.x * 15}px, ${mousePosition.y * 15}px, 0)`,
+            transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
           }}
         />
         <div 
-          className="absolute w-80 h-80 rounded-full bg-gradient-to-r from-pink-100/15 to-orange-100/15 blur-3xl"
+          className="absolute w-64 h-64 rounded-full bg-gradient-to-r from-pink-50/20 to-orange-50/20 blur-3xl will-change-transform"
           style={{
-            bottom: '15%',
-            left: '15%',
-            transform: `translate(${mousePosition.x * -15}px, ${mousePosition.y * -15}px)`,
-            transition: 'transform 0.3s ease-out'
+            bottom: '20%',
+            left: '20%',
+            transform: `translate3d(${mousePosition.x * -10}px, ${mousePosition.y * -10}px, 0)`,
+            transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
           }}
         />
       </div>
-
-      {/* Grid pattern overlay */}
-      <div 
-        className="absolute inset-0 opacity-20"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px)
-          `,
-          backgroundSize: '50px 50px',
-          transform: `translate(${mousePosition.x * 10}px, ${mousePosition.y * 10}px)`
-        }}
-      />
       
       <div 
         className={`flex w-full max-w-7xl mx-auto justify-between items-start px-8 transition-all duration-1000 ${loaded ? 'opacity-100' : 'opacity-0'}`}
@@ -235,7 +252,6 @@ const HeroSection = ({
           {title}
         </h1>
         
-        {/* Subtle underline animation */}
         <div 
           className={`w-24 h-px bg-gradient-to-r from-transparent via-black to-transparent mx-auto mt-8 transition-all duration-1000 ${loaded ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`}
           style={{ transitionDelay: '800ms' }}
@@ -284,13 +300,13 @@ const HeroSection = ({
         </div>
       </div>
 
-      {/* Interactive cursor follower */}
+      {/* Optimized cursor follower */}
       <div 
-        className="absolute w-4 h-4 rounded-full bg-black/20 pointer-events-none transition-all duration-300 ease-out"
+        className="absolute w-3 h-3 rounded-full bg-black/15 pointer-events-none transition-all duration-500 ease-out will-change-transform"
         style={{
-          left: mousePosition.x * window.innerWidth - 8,
-          top: mousePosition.y * window.innerHeight - 8,
-          opacity: elementsOpacity * 0.6
+          left: mousePosition.x * window.innerWidth - 6,
+          top: mousePosition.y * window.innerHeight - 6,
+          opacity: elementsOpacity * 0.4
         }}
       />
     </section>
