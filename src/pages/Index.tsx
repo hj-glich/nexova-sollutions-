@@ -1,9 +1,11 @@
 
 import { useEffect, useState } from 'react';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const [loaded, setLoaded] = useState(false);
+  const navigate = useNavigate();
   
   useEffect(() => {
     document.title = "NexOva Creative Studio | Coming Soon";
@@ -23,6 +25,10 @@ const Home = () => {
       body.style.transition = '';
     };
   }, []);
+
+  const handleGetInTouch = () => {
+    navigate('/contact');
+  };
 
   return (
     <div className="min-h-screen bg-[#e5e5e5] flex items-center justify-center px-6">
@@ -45,39 +51,18 @@ const Home = () => {
           </p>
         </div>
 
-        {/* Contact Information */}
-        <div className={`space-y-8 transition-all duration-1000 delay-400 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <h3 className="text-xl font-display font-medium mb-8">Get in Touch</h3>
-          
-          <div className="grid gap-6 md:grid-cols-3">
-            <a 
-              href="mailto:nexovadesigns@gmail.com" 
-              className="flex flex-col items-center p-6 bg-white/50 rounded-lg hover:bg-white/70 transition-colors group"
-            >
-              <Mail className="w-8 h-8 mb-3 group-hover:scale-110 transition-transform" />
-              <span className="font-medium text-sm">Email</span>
-              <span className="text-black/70 text-sm mt-1">nexovadesigns@gmail.com</span>
-            </a>
-            
-            <a 
-              href="tel:+94701058606" 
-              className="flex flex-col items-center p-6 bg-white/50 rounded-lg hover:bg-white/70 transition-colors group"
-            >
-              <Phone className="w-8 h-8 mb-3 group-hover:scale-110 transition-transform" />
-              <span className="font-medium text-sm">Phone</span>
-              <span className="text-black/70 text-sm mt-1">+94 70 105 8606</span>
-            </a>
-            
-            <div className="flex flex-col items-center p-6 bg-white/50 rounded-lg">
-              <MapPin className="w-8 h-8 mb-3" />
-              <span className="font-medium text-sm">Location</span>
-              <span className="text-black/70 text-sm mt-1">Makola, Sri Lanka</span>
-            </div>
-          </div>
+        {/* Get in Touch Button */}
+        <div className={`mb-16 transition-all duration-1000 delay-400 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <Button 
+            onClick={handleGetInTouch}
+            className="bg-black text-white hover:bg-black/80 px-8 py-3 text-lg font-medium"
+          >
+            Get in Touch
+          </Button>
         </div>
 
         {/* Footer */}
-        <div className={`mt-16 pt-8 border-t border-black/20 transition-all duration-1000 delay-600 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div className={`pt-8 border-t border-black/20 transition-all duration-1000 delay-600 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <p className="text-black/60 text-sm">
             &copy; 2014 NexOva Creative Studio. Est. 2014
           </p>
