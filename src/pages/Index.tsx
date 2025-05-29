@@ -6,7 +6,7 @@ const Home = () => {
   const [loaded, setLoaded] = useState(false);
   
   useEffect(() => {
-    document.title = "NexOva | Coming Soon";
+    document.title = "NexOva Creative Studio | Coming Soon";
     
     // Animation sequence for initial load
     const body = document.body;
@@ -79,7 +79,7 @@ const Home = () => {
         {/* Footer */}
         <div className={`mt-16 pt-8 border-t border-black/20 transition-all duration-1000 delay-600 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <p className="text-black/60 text-sm">
-            &copy; {new Date().getFullYear()} NexOva. Est. 2025
+            &copy; 2014 NexOva Creative Studio. Est. 2014
           </p>
         </div>
       </div>
