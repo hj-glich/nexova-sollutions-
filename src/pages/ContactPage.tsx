@@ -33,7 +33,7 @@ const ContactPage = () => {
 
   return (
     <div className="min-h-screen bg-[#e5e5e5] flex items-center justify-center px-6">
-      <div className="max-w-2xl mx-auto text-center">
+      <div className="max-w-4xl mx-auto text-center">
         {/* Back Button */}
         <div className={`mb-8 transition-all duration-1000 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <Button 
@@ -60,29 +60,51 @@ const ContactPage = () => {
             Ready to bring your vision to life? We'd love to hear from you.
           </p>
           
-          <div className="grid gap-6 md:grid-cols-3">
-            <a 
-              href="mailto:nexovadesigns@gmail.com" 
-              className="flex flex-col items-center p-6 bg-white/50 rounded-lg hover:bg-white/70 transition-colors group"
-            >
-              <Mail className="w-8 h-8 mb-3 group-hover:scale-110 transition-transform" />
-              <span className="font-medium text-sm">Email</span>
-              <span className="text-black/70 text-sm mt-1">nexovadesigns@gmail.com</span>
-            </a>
+          <div className="grid gap-8 md:grid-cols-3 max-w-5xl mx-auto">
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/50 hover:shadow-xl hover:scale-105 transition-all duration-300 group">
+              <a 
+                href="mailto:nexovacreativestudio@gmail.com" 
+                className="flex flex-col items-center h-full"
+              >
+                <div className="w-16 h-16 bg-black/5 rounded-full flex items-center justify-center mb-4 group-hover:bg-black/10 transition-colors">
+                  <Mail className="w-8 h-8 text-black group-hover:scale-110 transition-transform" />
+                </div>
+                <span className="font-semibold text-lg mb-2">Email</span>
+                <span className="text-black/70 text-sm leading-relaxed text-center">nexovacreativestudio@gmail.com</span>
+              </a>
+            </div>
             
-            <a 
-              href="tel:+94701058606" 
-              className="flex flex-col items-center p-6 bg-white/50 rounded-lg hover:bg-white/70 transition-colors group"
-            >
-              <Phone className="w-8 h-8 mb-3 group-hover:scale-110 transition-transform" />
-              <span className="font-medium text-sm">Phone</span>
-              <span className="text-black/70 text-sm mt-1">+94 70 105 8606</span>
-            </a>
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/50 hover:shadow-xl hover:scale-105 transition-all duration-300 group">
+              <div className="flex flex-col items-center h-full">
+                <div className="w-16 h-16 bg-black/5 rounded-full flex items-center justify-center mb-4 group-hover:bg-black/10 transition-colors">
+                  <Phone className="w-8 h-8 text-black group-hover:scale-110 transition-transform" />
+                </div>
+                <span className="font-semibold text-lg mb-2">Phone</span>
+                <div className="space-y-1 text-center">
+                  <a 
+                    href="tel:+941058606" 
+                    className="block text-black/70 text-sm hover:text-black transition-colors"
+                  >
+                    +94 10 58 606
+                  </a>
+                  <a 
+                    href="tel:+94776617828" 
+                    className="block text-black/70 text-sm hover:text-black transition-colors"
+                  >
+                    +94 77 661 7828
+                  </a>
+                </div>
+              </div>
+            </div>
             
-            <div className="flex flex-col items-center p-6 bg-white/50 rounded-lg">
-              <MapPin className="w-8 h-8 mb-3" />
-              <span className="font-medium text-sm">Location</span>
-              <span className="text-black/70 text-sm mt-1">Makola, Sri Lanka</span>
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/50 hover:shadow-xl hover:scale-105 transition-all duration-300 group">
+              <div className="flex flex-col items-center h-full">
+                <div className="w-16 h-16 bg-black/5 rounded-full flex items-center justify-center mb-4 group-hover:bg-black/10 transition-colors">
+                  <MapPin className="w-8 h-8 text-black group-hover:scale-110 transition-transform" />
+                </div>
+                <span className="font-semibold text-lg mb-2">Location</span>
+                <span className="text-black/70 text-sm">Sri Lanka</span>
+              </div>
             </div>
           </div>
         </div>
